@@ -1,7 +1,7 @@
 package lighthouse;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -12,7 +12,7 @@ import java.io.StringReader;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 
-public class LibraryTest {
+class LibraryTest {
     @Test
     void testJSoup() {
         String html = "<html><head><title>First parse</title></head>"
