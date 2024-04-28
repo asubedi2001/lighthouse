@@ -11,6 +11,6 @@ class TokenizerTest {
     @Test
     void testLoadStoplist() throws IOException {
         Set<String> stoplist = Tokenizer.loadStoplist(Tokenizer.STOPLIST_PATH);
-        assertEquals(8, stoplist.size());
+        assertEquals(575, stoplist.size());
     }
 }
