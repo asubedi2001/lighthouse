@@ -35,6 +35,15 @@ application {
     mainClass = 'lighthouse.Lighthouse'
 }
 
+jar {
+    manifest {
+        attributes (
+            'Class-Path': configurations.runtimeClasspath.files.collect { it.getName() }.join(' '),
+            'Main-Class': 'lighthouse.Lighthouse'
+        )
+    }
+}
+
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
