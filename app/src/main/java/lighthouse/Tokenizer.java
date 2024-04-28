@@ -1,22 +1,31 @@
 package lighthouse;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
 import org.jsoup.Jsoup;
 
 public class Tokenizer {
     public static final String INPUT_DIR = "files";
     public static final String OUTPUT_DIR = "files_out";
     public static final String STOPLIST_PATH = "stoplist.txt";
+
+    protected static final Set<String> STOPLIST = loadStoplist(STOPLIST_PATH);
 
     private Tokenizer() {
     }
@@ -29,61 +38,90 @@ public class Tokenizer {
         return stoplistReader.lines().collect(Collectors.toSet());
     }
 
-    private static void indexDirectory(Path inputDirPath, Path outputDirPath) {
+    private static void indexDirectory(String inputDirPath, String outputDirPath) {
         /*
-         * Perform tokenization across all files in input directory +
-         * Place resulting token files in the specified output directory
+         * Perform tokenization across all files in input directory and
+         * place resulting token files in the specified output directory
          */
+        File inputDir;
+        File outputDir;
+        try {
+            inputDir = new File(ClassLoader.getSystemResource(inputDirPath).toURI());
+            outputDir = new File(ClassLoader.getSystemResource(outputDirPath).toURI());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+            return;
+        }
 
         // if output directory does not exist, make it
-        File outputDir = outputDirPath.toFile();
         if (!outputDir.exists()) {
             outputDir.mkdirs();
         }
 
-        File inputDir = inputDirPath.toFile();
+        // check input directory path
+        if (!inputDir.exists()) {
+            throw new IllegalArgumentException("Input directory is empty");
+        }
+        if (!inputDir.isDirectory()) {
+            throw new IllegalArgumentException("Input directory path is not a directory");
+        }
 
-        // loop through all files in input directory
-        if (inputDir.exists() && inputDir.isDirectory()) {
+        File[] files = inputDir.listFiles();
+        System.out.printf("Found %d documents to index in input directory.", files.length);
 
-            // create array of pathnames to files in the directory
-            File[] files = inputDir.listFiles();
-            System.out.printf("Found %d documents to index in input directory.", files.length);
-
-            // loop through each file in the array of all files in input directory
-            for (File file : files) {
-                // TODO: open file for tokenization here
-                System.out.println(file.getName());
-            }
-        } else {
-            System.out.println("Directory does not exist or is not a directory.");
+        // tokenize each file in the input directory
+        // write the token counter into the relevant output file
+        for (File file : files) {
+            System.out.println(file.getName());
+            Map<String, Integer> tokens = tokenizeFile(file);
+            writeTokens(file, tokens);
         }
 
     }
 
-    public static void tokenizeFile(File f) {
+    public static Map<String, Integer> tokenizeFile(File f) {
+        // extract and count the tokens from the file `f`, removing stopwords
+        // the map of tokens and counts is returned for accumulation and to write the
+        // output file
         try {
             // grab all visible text from the HTML file
-            String allText = Jsoup.parse(f).body().text();
+            String documentText = Jsoup.parse(f).body().text();
 
-            String[] tokens = allText.split("\s+");
+            String[] tokens = documentText.split("\s+");
+            List<String> tokensList = Arrays.asList(tokens);
 
-            for (String t : tokens) {
-                // remove special characters and normalize the token
-                t = t.replaceAll("[!()_,.?]", "");
-                t = t.toLowerCase();
-
-                // filter stopwords
-            }
+            // remove special characters and downcase the tokens
+            // throw out stopwords and any empty tokens after processing
+            // ref:
+            // https://stackoverflow.com/questions/14260134/elegant-way-of-counting-occurrences-in-a-java-collection
+            return tokensList.stream()
+                    .map(String::toLowerCase)
+                    .map(t -> t.replaceAll("[!()_,.?]", ""))
+                    .filter(t -> t.length() != 0)
+                    .filter(t -> !STOPLIST.contains(t))
+                    .collect(Collectors.groupingBy(t -> t, Collectors.reducing(0, e -> 1, Integer::sum)));
 
         } catch (IOException e) {
             e.printStackTrace();
+            return new HashMap<>();
         }
     }
 
+    private static void writeTokens(File tokenFile, Map<String, Integer> tokens) {
+        // write `tokens` into `tokenFile` in csv format: token, count
+
+        try (FileWriter fileWriter = new FileWriter(tokenFile);
+                BufferedWriter writer = new BufferedWriter(fileWriter)) {
+            CSVPrinter printer = new CSVPrinter(writer, CSVFormat.DEFAULT);
+            printer.printRecords(tokens);
+            printer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public static void tokenize() {
-        Path inputDir = Paths.get(INPUT_DIR);
-        Path outputDir = Paths.get(OUTPUT_DIR);
-        indexDirectory(inputDir, outputDir);
+        indexDirectory(INPUT_DIR, OUTPUT_DIR);
     }
 }
