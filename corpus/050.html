@@ -1,0 +1,2964 @@
+<html lang="en"><head><style type="text/css" data-tag-name="trix-editor">trix-editor {
+    display: block;
+}
+
+trix-editor:empty:not(:focus)::before {
+    content: attr(placeholder);
+    color: graytext;
+    cursor: text;
+    pointer-events: none;
+    white-space: pre-line;
+}
+
+trix-editor a[contenteditable=false] {
+    cursor: text;
+}
+
+trix-editor img {
+    max-width: 100%;
+    height: auto;
+}
+
+trix-editor [data-trix-attachment] figcaption textarea {
+    resize: none;
+}
+
+trix-editor [data-trix-attachment] figcaption textarea.trix-autoresize-clone {
+    position: absolute;
+    left: -9999px;
+    max-height: 0px;
+}
+
+trix-editor [data-trix-attachment] figcaption[data-trix-placeholder]:empty::before {
+    content: attr(data-trix-placeholder);
+    color: graytext;
+}
+
+trix-editor [data-trix-cursor-target] {
+    display: inline-block !important;
+    width: 1px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+}
+
+trix-editor [data-trix-cursor-target=left] {
+    vertical-align: top !important;
+    margin-left: -1px !important;
+}
+
+trix-editor [data-trix-cursor-target=right] {
+    vertical-align: bottom !important;
+    margin-right: -1px !important;
+}</style><style type="text/css" data-tag-name="trix-toolbar">trix-toolbar {
+  display: block;
+}
+
+trix-toolbar {
+  white-space: nowrap;
+}
+
+trix-toolbar [data-trix-dialog] {
+  display: none;
+}
+
+trix-toolbar [data-trix-dialog][data-trix-active] {
+  display: block;
+}
+
+trix-toolbar [data-trix-dialog] [data-trix-validate]:invalid {
+  background-color: #ffdddd;
+}</style><style type="text/css">:host,:root{--fa-font-solid:normal 900 1em/1 "Font Awesome 6 Solid";--fa-font-regular:normal 400 1em/1 "Font Awesome 6 Regular";--fa-font-light:normal 300 1em/1 "Font Awesome 6 Light";--fa-font-thin:normal 100 1em/1 "Font Awesome 6 Thin";--fa-font-duotone:normal 900 1em/1 "Font Awesome 6 Duotone";--fa-font-brands:normal 400 1em/1 "Font Awesome 6 Brands"}svg:not(:host).svg-inline--fa,svg:not(:root).svg-inline--fa{overflow:visible;-webkit-box-sizing:content-box;box-sizing:content-box}.svg-inline--fa{display:var(--fa-display,inline-block);height:1em;overflow:visible;vertical-align:-.125em}.svg-inline--fa.fa-2xs{vertical-align:.1em}.svg-inline--fa.fa-xs{vertical-align:0}.svg-inline--fa.fa-sm{vertical-align:-.0714285705em}.svg-inline--fa.fa-lg{vertical-align:-.2em}.svg-inline--fa.fa-xl{vertical-align:-.25em}.svg-inline--fa.fa-2xl{vertical-align:-.3125em}.svg-inline--fa.fa-pull-left{margin-right:var(--fa-pull-margin,.3em);width:auto}.svg-inline--fa.fa-pull-right{margin-left:var(--fa-pull-margin,.3em);width:auto}.svg-inline--fa.fa-li{width:var(--fa-li-width,2em);top:.25em}.svg-inline--fa.fa-fw{width:var(--fa-fw-width,1.25em)}.fa-layers svg.svg-inline--fa{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.fa-layers-counter,.fa-layers-text{display:inline-block;position:absolute;text-align:center}.fa-layers{display:inline-block;height:1em;position:relative;text-align:center;vertical-align:-.125em;width:1em}.fa-layers svg.svg-inline--fa{-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-text{left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-counter{background-color:var(--fa-counter-background-color,#ff253a);border-radius:var(--fa-counter-border-radius,1em);-webkit-box-sizing:border-box;box-sizing:border-box;color:var(--fa-inverse,#fff);line-height:var(--fa-counter-line-height,1);max-width:var(--fa-counter-max-width,5em);min-width:var(--fa-counter-min-width,1.5em);overflow:hidden;padding:var(--fa-counter-padding,.25em .5em);right:var(--fa-right,0);text-overflow:ellipsis;top:var(--fa-top,0);-webkit-transform:scale(var(--fa-counter-scale,.25));transform:scale(var(--fa-counter-scale,.25));-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-bottom-right{bottom:var(--fa-bottom,0);right:var(--fa-right,0);top:auto;-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:bottom right;transform-origin:bottom right}.fa-layers-bottom-left{bottom:var(--fa-bottom,0);left:var(--fa-left,0);right:auto;top:auto;-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:bottom left;transform-origin:bottom left}.fa-layers-top-right{top:var(--fa-top,0);right:var(--fa-right,0);-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-top-left{left:var(--fa-left,0);right:auto;top:var(--fa-top,0);-webkit-transform:scale(var(--fa-layers-scale,.25));transform:scale(var(--fa-layers-scale,.25));-webkit-transform-origin:top left;transform-origin:top left}.fa-1x{font-size:1em}.fa-2x{font-size:2em}.fa-3x{font-size:3em}.fa-4x{font-size:4em}.fa-5x{font-size:5em}.fa-6x{font-size:6em}.fa-7x{font-size:7em}.fa-8x{font-size:8em}.fa-9x{font-size:9em}.fa-10x{font-size:10em}.fa-2xs{font-size:.625em;line-height:.1em;vertical-align:.225em}.fa-xs{font-size:.75em;line-height:.0833333337em;vertical-align:.125em}.fa-sm{font-size:.875em;line-height:.0714285718em;vertical-align:.0535714295em}.fa-lg{font-size:1.25em;line-height:.05em;vertical-align:-.075em}.fa-xl{font-size:1.5em;line-height:.0416666682em;vertical-align:-.125em}.fa-2xl{font-size:2em;line-height:.03125em;vertical-align:-.1875em}.fa-fw{text-align:center;width:1.25em}.fa-ul{list-style-type:none;margin-left:var(--fa-li-margin,2.5em);padding-left:0}.fa-ul>li{position:relative}.fa-li{left:calc(var(--fa-li-width,2em) * -1);position:absolute;text-align:center;width:var(--fa-li-width,2em);line-height:inherit}.fa-border{border-color:var(--fa-border-color,#eee);border-radius:var(--fa-border-radius,.1em);border-style:var(--fa-border-style,solid);border-width:var(--fa-border-width,.08em);padding:var(--fa-border-padding,.2em .25em .15em)}.fa-pull-left{float:left;margin-right:var(--fa-pull-margin,.3em)}.fa-pull-right{float:right;margin-left:var(--fa-pull-margin,.3em)}.fa-beat{-webkit-animation-name:fa-beat;animation-name:fa-beat;-webkit-animation-delay:var(--fa-animation-delay,0);animation-delay:var(--fa-animation-delay,0);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,ease-in-out);animation-timing-function:var(--fa-animation-timing,ease-in-out)}.fa-fade{-webkit-animation-name:fa-fade;animation-name:fa-fade;-webkit-animation-delay:var(--fa-animation-delay,0);animation-delay:var(--fa-animation-delay,0);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1));animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1))}.fa-beat-fade{-webkit-animation-name:fa-beat-fade;animation-name:fa-beat-fade;-webkit-animation-delay:var(--fa-animation-delay,0);animation-delay:var(--fa-animation-delay,0);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1));animation-timing-function:var(--fa-animation-timing,cubic-bezier(.4,0,.6,1))}.fa-flip{-webkit-animation-name:fa-flip;animation-name:fa-flip;-webkit-animation-delay:var(--fa-animation-delay,0);animation-delay:var(--fa-animation-delay,0);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,ease-in-out);animation-timing-function:var(--fa-animation-timing,ease-in-out)}.fa-spin{-webkit-animation-name:fa-spin;animation-name:fa-spin;-webkit-animation-delay:var(--fa-animation-delay,0);animation-delay:var(--fa-animation-delay,0);-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,2s);animation-duration:var(--fa-animation-duration,2s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,linear);animation-timing-function:var(--fa-animation-timing,linear)}.fa-spin-reverse{--fa-animation-direction:reverse}.fa-pulse,.fa-spin-pulse{-webkit-animation-name:fa-spin;animation-name:fa-spin;-webkit-animation-direction:var(--fa-animation-direction,normal);animation-direction:var(--fa-animation-direction,normal);-webkit-animation-duration:var(--fa-animation-duration,1s);animation-duration:var(--fa-animation-duration,1s);-webkit-animation-iteration-count:var(--fa-animation-iteration-count,infinite);animation-iteration-count:var(--fa-animation-iteration-count,infinite);-webkit-animation-timing-function:var(--fa-animation-timing,steps(8));animation-timing-function:var(--fa-animation-timing,steps(8))}@media (prefers-reduced-motion:reduce){.fa-beat,.fa-beat-fade,.fa-fade,.fa-flip,.fa-pulse,.fa-spin,.fa-spin-pulse{-webkit-animation-delay:-1ms;animation-delay:-1ms;-webkit-animation-duration:1ms;animation-duration:1ms;-webkit-animation-iteration-count:1;animation-iteration-count:1;-webkit-transition-delay:0s;transition-delay:0s;-webkit-transition-duration:0s;transition-duration:0s}}@-webkit-keyframes fa-beat{0%,90%{-webkit-transform:scale(1);transform:scale(1)}45%{-webkit-transform:scale(var(--fa-beat-scale,1.25));transform:scale(var(--fa-beat-scale,1.25))}}@keyframes fa-beat{0%,90%{-webkit-transform:scale(1);transform:scale(1)}45%{-webkit-transform:scale(var(--fa-beat-scale,1.25));transform:scale(var(--fa-beat-scale,1.25))}}@-webkit-keyframes fa-fade{50%{opacity:var(--fa-fade-opacity,.4)}}@keyframes fa-fade{50%{opacity:var(--fa-fade-opacity,.4)}}@-webkit-keyframes fa-beat-fade{0%,100%{opacity:var(--fa-beat-fade-opacity,.4);-webkit-transform:scale(1);transform:scale(1)}50%{opacity:1;-webkit-transform:scale(var(--fa-beat-fade-scale,1.125));transform:scale(var(--fa-beat-fade-scale,1.125))}}@keyframes fa-beat-fade{0%,100%{opacity:var(--fa-beat-fade-opacity,.4);-webkit-transform:scale(1);transform:scale(1)}50%{opacity:1;-webkit-transform:scale(var(--fa-beat-fade-scale,1.125));transform:scale(var(--fa-beat-fade-scale,1.125))}}@-webkit-keyframes fa-flip{50%{-webkit-transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg));transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg))}}@keyframes fa-flip{50%{-webkit-transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg));transform:rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg))}}@-webkit-keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.fa-rotate-90{-webkit-transform:rotate(90deg);transform:rotate(90deg)}.fa-rotate-180{-webkit-transform:rotate(180deg);transform:rotate(180deg)}.fa-rotate-270{-webkit-transform:rotate(270deg);transform:rotate(270deg)}.fa-flip-horizontal{-webkit-transform:scale(-1,1);transform:scale(-1,1)}.fa-flip-vertical{-webkit-transform:scale(1,-1);transform:scale(1,-1)}.fa-flip-both,.fa-flip-horizontal.fa-flip-vertical{-webkit-transform:scale(-1,-1);transform:scale(-1,-1)}.fa-rotate-by{-webkit-transform:rotate(var(--fa-rotate-angle,none));transform:rotate(var(--fa-rotate-angle,none))}.fa-stack{display:inline-block;vertical-align:middle;height:2em;position:relative;width:2.5em}.fa-stack-1x,.fa-stack-2x{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0;z-index:var(--fa-stack-z-index,auto)}.svg-inline--fa.fa-stack-1x{height:1em;width:1.25em}.svg-inline--fa.fa-stack-2x{height:2em;width:2.5em}.fa-inverse{color:var(--fa-inverse,#fff)}.fa-sr-only,.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.fa-sr-only-focusable:not(:focus),.sr-only-focusable:not(:focus){position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.svg-inline--fa .fa-primary{fill:var(--fa-primary-color,currentColor);opacity:var(--fa-primary-opacity,1)}.svg-inline--fa .fa-secondary{fill:var(--fa-secondary-color,currentColor);opacity:var(--fa-secondary-opacity,.4)}.svg-inline--fa.fa-swap-opacity .fa-primary{opacity:var(--fa-secondary-opacity,.4)}.svg-inline--fa.fa-swap-opacity .fa-secondary{opacity:var(--fa-primary-opacity,1)}.svg-inline--fa mask .fa-primary,.svg-inline--fa mask .fa-secondary{fill:#000}.fa-duotone.fa-inverse,.fad.fa-inverse{color:var(--fa-inverse,#fff)}</style><style type="text/css">.turbo-progress-bar {
+  position: fixed;
+  display: block;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: #0076ff;
+  z-index: 2147483647;
+  transition:
+    width 300ms ease-out,
+    opacity 150ms 150ms ease-in;
+  transform: translate3d(0, 0, 0);
+}
+</style>
+    <!-- Google Tag Manager -->
+    <script src="https://pagead2.googlesyndication.com/pagead/managed/js/adsense/m202404230101/reactive_library_fy2021.js"></script><script src="https://pagead2.googlesyndication.com/pagead/managed/js/adsense/m202404230101/show_ads_impl_fy2021.js"></script><script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/js?id=G-NNXC2XRY9X&amp;cx=c&amp;_slc=1"></script><script async="" src="//www.google-analytics.com/analytics.js"></script><script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-KM9HBDJP"></script><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-KM9HBDJP');</script>
+    <!-- End Google Tag Manager -->
+
+    <title>The Greatest Books of All Time</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="csrf-param" content="authenticity_token">
+<meta name="csrf-token" content="-TyCx4SztBPTgfA4EqtO5J1yLEnBTZyYg129pkuMR_yY-4tN0IiLl3G7L2-gQp7XPMyaoQyYg-lzYhP5snn1DQ">
+    
+    <meta name="turbo-visit-control" content="reload">
+      <meta name="description" content="The Greatest Books of All Time. This list is generated by aggregating 286 lists from various critics, authors, experts, and readers.">
+    <meta name="action-cable-url" content="wss://ws.thegreatestbooks.org/cable">
+
+    
+    <link rel="next" href="/page/2">
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/assets/favicon/site.webmanifest">
+
+    <link rel="stylesheet" href="/assets/application-1ec0b4bcd26f35d1279fd32cf2bd2b6f7f5f3e68997578a1a4c22b3d5abd00f0.css" data-turbo-track="reload">
+    <script src="/assets/application-890bbdd03d3723bba6beef95ad789dac23ba3ae5a4b60343c5c5d0e7562f8b3a.js" data-turbo-track="reload" defer="defer" type="module"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&amp;display=swap" rel="stylesheet">
+
+  <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2193700692946691" crossorigin="anonymous" data-checked-head="true"></script><meta http-equiv="origin-trial" content="AlK2UR5SkAlj8jjdEc9p3F3xuFYlF6LYjAML3EOqw1g26eCwWPjdmecULvBH5MVPoqKYrOfPhYVL71xAXI1IBQoAAAB8eyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="Amm8/NmvvQfhwCib6I7ZsmUxiSCfOxWxHayJwyU1r3gRIItzr7bNQid6O8ZYaE1GSQTa69WwhPC9flq/oYkRBwsAAACCeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiV2ViVmlld1hSZXF1ZXN0ZWRXaXRoRGVwcmVjYXRpb24iLCJleHBpcnkiOjE3NTgwNjcxOTksImlzU3ViZG9tYWluIjp0cnVlfQ=="><meta http-equiv="origin-trial" content="A/ERL66fN363FkXxgDc6F1+ucRUkAhjEca9W3la6xaLnD2Y1lABsqmdaJmPNaUKPKVBRpyMKEhXYl7rSvrQw+AkAAACNeyJvcmlnaW4iOiJodHRwczovL2RvdWJsZWNsaWNrLm5ldDo0NDMiLCJmZWF0dXJlIjoiRmxlZGdlQmlkZGluZ0FuZEF1Y3Rpb25TZXJ2ZXIiLCJleHBpcnkiOjE3MTkzNTk5OTksImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><meta http-equiv="origin-trial" content="A6OdGH3fVf4eKRDbXb4thXA4InNqDJDRhZ8U533U/roYjp4Yau0T3YSuc63vmAs/8ga1cD0E3A7LEq6AXk1uXgsAAACTeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZXN5bmRpY2F0aW9uLmNvbTo0NDMiLCJmZWF0dXJlIjoiRmxlZGdlQmlkZGluZ0FuZEF1Y3Rpb25TZXJ2ZXIiLCJleHBpcnkiOjE3MTkzNTk5OTksImlzU3ViZG9tYWluIjp0cnVlLCJpc1RoaXJkUGFydHkiOnRydWV9"><script async="" src="https://fundingchoicesmessages.google.com/i/ca-pub-2193700692946691?ers=2"></script><script async="" src="https://fundingchoicesmessages.google.com/f/AGSKWxXZVf5SCKVJaI2ukrheaj5Hqot4t-h3x55pccaEp_6rGFxLX28urxxiZGD0mVjC9PF8JO4fclj9zPg9FmzXp3HXc2H_vSS2LQ78JOtwHzhmCmadPIgKeoJVM8_vIuk-rm7bgyo3dw==?fccs=W251bGwsbnVsbCxudWxsLG51bGwsbnVsbCxudWxsLFsxNzE0MzcyMDk0LDE5MDAwMDAwMF0sbnVsbCxudWxsLG51bGwsW251bGwsWzddXSwiaHR0cHM6Ly90aGVncmVhdGVzdGJvb2tzLm9yZy90aGUtZ3JlYXRlc3QtYm9va3MiLG51bGwsW1s4LCJ1RGN0bW1nSkxCZyJdLFs5LCJlbi1VUyJdLFsxOCwiW1tbMF1dXSJdLFsxOSwiMiJdXV0"></script><script async="" src="https://fundingchoicesmessages.google.com/f/AGSKWxUA9NoheZLBqT5TprbyufwJ9xNkwyauT-i4oIUdn8-Jadgu3yz9_fAlPwTpjmslbBiNvZRgX4CDaQH7mmA3hSqjQtWWbzgOkGeXGhDglrGp0XAgBWRmSKLTIQPGfYUosAULaKPQ1t-kznPqWd3D35sbRYM2BU27GWlv0igp11uxbsZkSp1b37uem1gq/_/collisionadmarker._adlabel_/promo/ad_.fm/ads//adserver1-"></script><script async="" src="https://pagead2.googlesyndication.com/pagead/js/rum.js?fcd=true"></script></head>
+
+  <body aria-hidden="false" style="padding: 0px 0px 154px;">
+    <!-- Google Tag Manager (noscript) -->
+      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KM9HBDJP"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <nav class="navbar navbar-expand-lg bg-light  fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+          <img style="width: 25px;" alt="The Greatest Books Logo" src="/assets/logo2-1a2f87c325e9791c89cc50994578955eea237d8b3177fd7e0402234c4e61fd5e.gif">
+          The Greatest Books
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 small-text">
+            <li class="nav-item">
+              <a class="nav-link" href="/rankings">Rankings</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/lists">Lists</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/genres">Genres</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/news">News</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                My Stuff
+              </a>
+              <ul class="dropdown-menu shadow bg-body-tertiary rounded">
+                <li><a class="dropdown-item small-text" href="/user_lists">My Lists</a></li>
+                <li><a class="dropdown-item small-text" href="/reviews">My Reviews</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                More
+              </a>
+              <ul class="dropdown-menu shadow bg-body-tertiary rounded">
+                <li><a class="dropdown-item small-text" href="/privacy_policy">Privacy Policy</a></li>
+                <li><a class="dropdown-item small-text" href="/deletion_policy">Deletion Policy</a></li>
+                <li><a class="dropdown-item small-text" href="https://www.buymeacoffee.com/thegreatest" target="_blank">Support The Site!</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="d-flex small-text" action="/books/search" method="get">
+            <input class="form-control me-2 form-control-sm" name="query" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-primary btn-sm" type="submit">
+              <i class="bi bi-search"></i>
+            </button>
+          </form>
+          <turbo-cable-stream-source channel="Turbo::StreamsChannel" signed-stream-name="ImF1dGhfc3RhdHVzIg==--134b0d10dda293ba590bf8b8c84827811b2a39d93bb8d98e149f48d0c57fc7cf" connected=""></turbo-cable-stream-source>
+          <div id="auth-status-container" class="pb-3 pb-md-0">
+            <turbo-frame id="auth-status-frame" src="https://thegreatestbooks.org/users/auth_status" complete="">
+  <div class="ps-md-2 pe-2 pt-2 pt-md-0">
+      <a data-bs-toggle="modal" data-bs-target="#authModal" class="btn btn-sm btn-outline-success" href="#">Login</a>
+  </div>
+</turbo-frame>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="container pt-5" style="height: auto !important;">
+      <div class="main" style="height: auto !important;">
+        
+        
+<div class="row mt-3 mb-2">
+  <!-- First Column: Title and Description -->
+  <div class="col-md-8">
+    <h1>The Greatest Books of All Time</h1>
+    <!-- Link to trigger modal -->
+    <p class="d-md-none">
+      <a href="#" data-bs-toggle="modal" data-bs-target="#mobileModal">Click to learn how this list is calculated.</a>
+    </p>
+    <p class="d-none d-md-block">
+          This list represents a comprehensive and trusted collection of the greatest books. 
+    Developed through a specialized algorithm, it brings together 286 'best of' book lists to form a
+    definitive guide to the world's most acclaimed books. For those interested in how these books are chosen, 
+    additional details can be found on the <a href="/rankings" class="underline-link" alt="Rankings Page">rankings page</a>.
+
+    </p>
+  </div>
+    <!-- Second Column: Survey in a Card -->
+    <div class="col-md-4">
+      <turbo-frame loading="lazy" id="show_survey" src="https://thegreatestbooks.org/show_survey" complete="">
+  <div class="card">
+    <div class="card-header bg-light">
+      Your Opinion Matters
+    </div>
+    <div class="card-body">
+      <p class="small-text">
+        What are your favorite books of all time? Please click the button below to take the survey.
+      </p>
+      <span id="survey-btn">
+          <a data-bs-toggle="modal" data-bs-target="#authModal" class="btn btn-outline-primary btn-sm" href="#">Start Survey</a>
+      </span>
+    </div>
+  </div>
+</turbo-frame>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="mobileModal" tabindex="-1" aria-labelledby="mobileModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="mobileModalLabel">List Calculation Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+            This list represents a comprehensive and trusted collection of the greatest books. 
+    Developed through a specialized algorithm, it brings together 286 'best of' book lists to form a
+    definitive guide to the world's most acclaimed books. For those interested in how these books are chosen, 
+    additional details can be found on the <a href="/rankings" class="underline-link" alt="Rankings Page">rankings page</a>.
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" style="height: auto !important;">
+  <div class="col-lg-4 order-lg-2 order-1">
+
+  <div class="d-block d-sm-none bg-light p-2 d-flex align-items-center">
+    <span class="me-2">Filter by:</span>
+    <!-- Genres Button -->
+    <a data-bs-toggle="modal" data-bs-target="#genre-modal" class="btn btn-primary me-2" href="#">Genres</a>
+  
+    <!-- Published Dates Button -->
+    <a data-bs-toggle="modal" data-bs-target="#date-filter-modal" class="btn btn-primary me-2" href="#">Dates</a>
+    
+      <!-- Countries Button -->
+      <a data-bs-toggle="modal" data-bs-target="#country-modal" class="btn btn-primary" href="#">Countries</a>
+  </div>
+
+  <div class="row category-row d-none d-sm-block">
+    <!-- Social Media Links -->
+    <div class="row mb-3">
+      <div class="col-auto">
+        Follow on: 
+      </div>
+      <!-- Twitter -->
+      <div class="col-auto">
+        <a href="https://twitter.com/thegreatestbks" class="btn btn-sm btn-twitter">
+          <i class="bi bi-twitter"></i>
+        </a>
+      </div>
+
+      <!-- Discord -->
+      <div class="col-auto">
+        <a href="https://discord.gg/8JE9fpMtZp" class="btn btn-sm btn-discord">
+          <i class="bi bi-discord"></i>
+        </a>
+      </div>
+
+      <!-- Facebook -->
+      <div class="col-auto">
+        <a href="https://www.facebook.com/profile.php?id=61555129978566" class="btn btn-sm btn-facebook">
+          <i class="bi bi-facebook"></i>
+        </a>
+      </div>
+
+      <!-- Instagram -->
+      <div class="col-auto">
+        <a href="https://www.instagram.com/thegreatestbooksever/" class="btn btn-sm btn-instagram">
+          <i class="bi bi-instagram"></i>
+        </a>
+      </div>
+    </div>
+    <div class="d-flex bg-secondary pt-2 align-items-center border rounded text-white mb-2">
+      <h3 class="fs-6">Genres</h3>
+    </div>
+    <!-- Are there already categories selected? -->
+      <div class="row categories-row">
+  <!-- Search input row -->
+  <div class="col-12 mb-3 autocomplete-container">
+    <div class="autoComplete_wrapper" role="combobox" aria-owns="autoComplete_list_1" aria-haspopup="true" aria-expanded="false"><input type="text" class="form-control category-autocomplete" placeholder="Search for genres..." id="non-mobile-category-filter" aria-controls="autoComplete_list_1" aria-autocomplete="both"><ul id="autoComplete_list_1" role="listbox" hidden="" class="list-group autocomplete-results"></ul></div>
+  </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="adventure-bce047db-9f67-4195-b654-cffb3e8493b5" href="/the-greatest/adventure-bce047db-9f67-4195-b654-cffb3e8493b5/books">Adventure (697)</a>
+        <a class="category-link d-block mb-2 " data-slug="allegorical" href="/the-greatest/allegorical/books">Allegorical (262)</a>
+    </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="american-history" href="/the-greatest/american-history/books">American History (355)</a>
+        <a class="category-link d-block mb-2 " data-slug="anthologies" href="/the-greatest/anthologies/books">Anthologies (337)</a>
+    </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="autobiography" href="/the-greatest/autobiography/books">Autobiography (733)</a>
+        <a class="category-link d-block mb-2 " data-slug="biography" href="/the-greatest/biography/books">Biography (521)</a>
+    </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="children-s-books" href="/the-greatest/children-s-books/books">Children's books (363)</a>
+        <a class="category-link d-block mb-2 " data-slug="coming-of-age" href="/the-greatest/coming-of-age/books">Coming of age (971)</a>
+    </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="contemporary" href="/the-greatest/contemporary/books">Contemporary (802)</a>
+        <a class="category-link d-block mb-2 " data-slug="crime" href="/the-greatest/crime/books">Crime (531)</a>
+    </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="drama" href="/the-greatest/drama/books">Drama (1098)</a>
+        <a class="category-link d-block mb-2 " data-slug="experimental" href="/the-greatest/experimental/books">Experimental (309)</a>
+    </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="family" href="/the-greatest/family/books">Family (573)</a>
+        <a class="category-link d-block mb-2 " data-slug="fantasy" href="/the-greatest/fantasy/books">Fantasy (804)</a>
+    </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="fiction" href="/the-greatest/fiction/books">Fiction (7092)</a>
+        <a class="category-link d-block mb-2 " data-slug="historical-fiction" href="/the-greatest/historical-fiction/books">Historical fiction (1753)</a>
+    </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="history" href="/the-greatest/history/books">History (768)</a>
+        <a class="category-link d-block mb-2 " data-slug="horror" href="/the-greatest/horror/books">Horror (283)</a>
+    </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="humor" href="/the-greatest/humor/books">Humor (465)</a>
+        <a class="category-link d-block mb-2 " data-slug="modernist" href="/the-greatest/modernist/books">Modernist (289)</a>
+    </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="mystery" href="/the-greatest/mystery/books">Mystery (651)</a>
+        <a class="category-link d-block mb-2 " data-slug="nonfiction" href="/the-greatest/nonfiction/books">Nonfiction (2947)</a>
+    </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="plays" href="/the-greatest/plays/books">Plays (434)</a>
+        <a class="category-link d-block mb-2 " data-slug="poetry" href="/the-greatest/poetry/books">Poetry (740)</a>
+    </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="political" href="/the-greatest/political/books">Political (700)</a>
+        <a class="category-link d-block mb-2 " data-slug="postmodern" href="/the-greatest/postmodern/books">Postmodern (264)</a>
+    </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="psychological" href="/the-greatest/psychological/books">Psychological (936)</a>
+        <a class="category-link d-block mb-2 " data-slug="romance" href="/the-greatest/romance/books">Romance (389)</a>
+    </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="satire" href="/the-greatest/satire/books">Satire (684)</a>
+        <a class="category-link d-block mb-2 " data-slug="science-fiction" href="/the-greatest/science-fiction/books">Science fiction (713)</a>
+    </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="short-stories-3b05c143-3060-4ba0-8c12-52547523f50e" href="/the-greatest/short-stories-3b05c143-3060-4ba0-8c12-52547523f50e/books">Short Stories (382)</a>
+        <a class="category-link d-block mb-2 " data-slug="social-commentary" href="/the-greatest/social-commentary/books">Social &amp; Cultural Fiction (1295)</a>
+    </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="metaphysical-visionary-fiction" href="/the-greatest/metaphysical-visionary-fiction/books">Speculative Fiction (1569)</a>
+        <a class="category-link d-block mb-2 " data-slug="supernatural" href="/the-greatest/supernatural/books">Supernatural (306)</a>
+    </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="suspense" href="/the-greatest/suspense/books">Suspense (701)</a>
+        <a class="category-link d-block mb-2 " data-slug="thrillers" href="/the-greatest/thrillers/books">Thrillers (556)</a>
+    </div>
+  <div class="col-6">
+    <a class="fw-semibold" href="/genres">View all genres</a>
+  </div>
+</div>
+
+    
+      <!-- Are there already countries selected? -->
+      <div class="d-flex bg-secondary pt-2 align-items-center border rounded text-white mt-4 mb-2">
+        <h3 class="fs-6">Countries</h3>
+      </div>
+        
+<div class="row countries-row">
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/american/authors">American (4369)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/argentinian/authors">Argentinian (30)</a>
+    </div>
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/australian/authors">Australian (112)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/austrian/authors">Austrian (98)</a>
+    </div>
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/british/authors">British (2264)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/bulgarian/authors">Bulgarian (40)</a>
+    </div>
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/canadian/authors">Canadian (187)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/chinese/authors">Chinese (59)</a>
+    </div>
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/colombian/authors">Colombian (29)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/czech/authors">Czech (39)</a>
+    </div>
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/danish/authors">Danish (37)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/dutch/authors">Dutch (29)</a>
+    </div>
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/english/authors">English (41)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/french/authors">French (607)</a>
+    </div>
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/german/authors">German (321)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/greek/authors">Greek (197)</a>
+    </div>
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/hungarian/authors">Hungarian (66)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/indian/authors">Indian (76)</a>
+    </div>
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/irish/authors">Irish (184)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/israeli/authors">Israeli (30)</a>
+    </div>
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/italian/authors">Italian (173)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/japanese/authors">Japanese (93)</a>
+    </div>
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/multiple/authors">Multiple (59)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/new-zealander/authors">New Zealander (31)</a>
+    </div>
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/nigerian/authors">Nigerian (37)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/norwegian/authors">Norwegian (42)</a>
+    </div>
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/polish/authors">Polish (62)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/portuguese/authors">Portuguese (32)</a>
+    </div>
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/roman/authors">Roman (31)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/russian/authors">Russian (212)</a>
+    </div>
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/scottish/authors">Scottish (71)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/south-african/authors">South African (53)</a>
+    </div>
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/spanish/authors">Spanish (120)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/swedish/authors">Swedish (81)</a>
+    </div>
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/swiss/authors">Swiss (38)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/unknown/authors">Unknown (186)</a>
+    </div>
+  <div class="col-6">
+    <a class="fw-semibold" href="/countries">View all countries</a>
+  </div>
+</div>
+
+    <div class="d-flex bg-secondary pt-2 align-items-center border rounded text-white mt-4 mb-2">
+      <h3 class="fs-6">Date Range</h3>
+    </div>
+
+    <form id="date-filter-form" class="date-filter-form" action="/" accept-charset="UTF-8" method="get">
+      <div class="mb-3 row"><label class="col-form-label col-sm-2" for="date_start">Start</label><div class="col-sm-10"><select id="date-start" class="form-select date-start-input" name="date_start"><option value="">Any</option>
+<option value="2020">2020</option>
+<option value="2015">2015</option>
+<option value="2010">2010</option>
+<option value="2005">2005</option>
+<option value="2000">2000</option>
+<option value="1995">1995</option>
+<option value="1990">1990</option>
+<option value="1985">1985</option>
+<option value="1980">1980</option>
+<option value="1975">1975</option>
+<option value="1970">1970</option>
+<option value="1965">1965</option>
+<option value="1960">1960</option>
+<option value="1955">1955</option>
+<option value="1950">1950</option>
+<option value="1945">1945</option>
+<option value="1940">1940</option>
+<option value="1935">1935</option>
+<option value="1930">1930</option>
+<option value="1925">1925</option>
+<option value="1920">1920</option>
+<option value="1915">1915</option>
+<option value="1910">1910</option>
+<option value="1905">1905</option>
+<option value="1900">1900</option>
+<option value="1895">1895</option>
+<option value="1890">1890</option>
+<option value="1885">1885</option>
+<option value="1880">1880</option>
+<option value="1875">1875</option>
+<option value="1870">1870</option>
+<option value="1865">1865</option>
+<option value="1860">1860</option>
+<option value="1855">1855</option>
+<option value="1850">1850</option>
+<option value="1845">1845</option>
+<option value="1840">1840</option>
+<option value="1835">1835</option>
+<option value="1830">1830</option>
+<option value="1825">1825</option>
+<option value="1820">1820</option>
+<option value="1815">1815</option>
+<option value="1810">1810</option>
+<option value="1805">1805</option>
+<option value="1800">1800</option>
+<option value="1795">1795</option>
+<option value="1790">1790</option>
+<option value="1785">1785</option>
+<option value="1780">1780</option>
+<option value="1775">1775</option>
+<option value="1770">1770</option>
+<option value="1765">1765</option>
+<option value="1760">1760</option>
+<option value="1755">1755</option>
+<option value="1750">1750</option>
+<option value="1745">1745</option>
+<option value="1740">1740</option>
+<option value="1735">1735</option>
+<option value="1730">1730</option>
+<option value="1725">1725</option>
+<option value="1720">1720</option>
+<option value="1715">1715</option>
+<option value="1710">1710</option>
+<option value="1705">1705</option>
+<option value="1700">1700</option>
+<option value="1695">1695</option>
+<option value="1690">1690</option>
+<option value="1685">1685</option>
+<option value="1680">1680</option>
+<option value="1675">1675</option>
+<option value="1670">1670</option>
+<option value="1665">1665</option>
+<option value="1660">1660</option>
+<option value="1655">1655</option>
+<option value="1650">1650</option>
+<option value="1645">1645</option>
+<option value="1640">1640</option>
+<option value="1635">1635</option>
+<option value="1630">1630</option>
+<option value="1625">1625</option>
+<option value="1620">1620</option>
+<option value="1615">1615</option>
+<option value="1610">1610</option>
+<option value="1605">1605</option>
+<option value="1600">1600</option>
+<option value="1595">1595</option>
+<option value="1590">1590</option>
+<option value="1585">1585</option>
+<option value="1580">1580</option>
+<option value="1575">1575</option>
+<option value="1570">1570</option>
+<option value="1565">1565</option>
+<option value="1560">1560</option>
+<option value="1555">1555</option>
+<option value="1550">1550</option>
+<option value="1545">1545</option>
+<option value="1540">1540</option>
+<option value="1535">1535</option>
+<option value="1530">1530</option>
+<option value="1525">1525</option>
+<option value="1520">1520</option>
+<option value="1515">1515</option>
+<option value="1510">1510</option>
+<option value="1505">1505</option>
+<option value="1500">1500</option>
+<option value="1495">1495</option>
+<option value="1490">1490</option>
+<option value="1485">1485</option>
+<option value="1480">1480</option>
+<option value="1475">1475</option>
+<option value="1470">1470</option>
+<option value="1465">1465</option>
+<option value="1460">1460</option>
+<option value="1455">1455</option>
+<option value="1450">1450</option>
+<option value="1445">1445</option>
+<option value="1440">1440</option>
+<option value="1435">1435</option>
+<option value="1430">1430</option>
+<option value="1425">1425</option>
+<option value="1420">1420</option>
+<option value="1415">1415</option>
+<option value="1410">1410</option>
+<option value="1405">1405</option>
+<option value="1400">1400</option>
+<option value="1395">1395</option>
+<option value="1390">1390</option>
+<option value="1385">1385</option>
+<option value="1380">1380</option>
+<option value="1375">1375</option>
+<option value="1370">1370</option>
+<option value="1365">1365</option>
+<option value="1360">1360</option>
+<option value="1355">1355</option>
+<option value="1350">1350</option>
+<option value="1345">1345</option>
+<option value="1340">1340</option>
+<option value="1335">1335</option>
+<option value="1330">1330</option>
+<option value="1325">1325</option>
+<option value="1320">1320</option>
+<option value="1315">1315</option>
+<option value="1310">1310</option>
+<option value="1305">1305</option>
+<option value="1300">1300</option>
+<option value="1295">1295</option>
+<option value="1290">1290</option>
+<option value="1285">1285</option>
+<option value="1280">1280</option>
+<option value="1275">1275</option>
+<option value="1270">1270</option>
+<option value="1265">1265</option>
+<option value="1260">1260</option>
+<option value="1255">1255</option>
+<option value="1250">1250</option>
+<option value="1245">1245</option>
+<option value="1240">1240</option>
+<option value="1235">1235</option>
+<option value="1230">1230</option>
+<option value="1225">1225</option>
+<option value="1220">1220</option>
+<option value="1215">1215</option>
+<option value="1210">1210</option>
+<option value="1205">1205</option>
+<option value="1200">1200</option>
+<option value="1195">1195</option>
+<option value="1190">1190</option>
+<option value="1185">1185</option>
+<option value="1180">1180</option>
+<option value="1175">1175</option>
+<option value="1170">1170</option>
+<option value="1165">1165</option>
+<option value="1160">1160</option>
+<option value="1155">1155</option>
+<option value="1150">1150</option>
+<option value="1145">1145</option>
+<option value="1140">1140</option>
+<option value="1135">1135</option>
+<option value="1130">1130</option>
+<option value="1125">1125</option>
+<option value="1120">1120</option>
+<option value="1115">1115</option>
+<option value="1110">1110</option>
+<option value="1105">1105</option>
+<option value="1100">1100</option>
+<option value="1095">1095</option>
+<option value="1090">1090</option>
+<option value="1085">1085</option>
+<option value="1080">1080</option>
+<option value="1075">1075</option>
+<option value="1070">1070</option>
+<option value="1065">1065</option>
+<option value="1060">1060</option>
+<option value="1055">1055</option>
+<option value="1050">1050</option>
+<option value="1045">1045</option>
+<option value="1040">1040</option>
+<option value="1035">1035</option>
+<option value="1030">1030</option>
+<option value="1025">1025</option>
+<option value="1020">1020</option>
+<option value="1015">1015</option>
+<option value="1010">1010</option>
+<option value="1005">1005</option>
+<option value="1000">1000</option></select></div></div>
+      <div class="mb-3 row"><label class="col-form-label col-sm-2" for="date_end">End</label><div class="col-sm-10"><select id="date-end" class="form-select date-end-input" name="date_end"><option value="">Any</option>
+<option value="2020">2020</option>
+<option value="2015">2015</option>
+<option value="2010">2010</option>
+<option value="2005">2005</option>
+<option value="2000">2000</option>
+<option value="1995">1995</option>
+<option value="1990">1990</option>
+<option value="1985">1985</option>
+<option value="1980">1980</option>
+<option value="1975">1975</option>
+<option value="1970">1970</option>
+<option value="1965">1965</option>
+<option value="1960">1960</option>
+<option value="1955">1955</option>
+<option value="1950">1950</option>
+<option value="1945">1945</option>
+<option value="1940">1940</option>
+<option value="1935">1935</option>
+<option value="1930">1930</option>
+<option value="1925">1925</option>
+<option value="1920">1920</option>
+<option value="1915">1915</option>
+<option value="1910">1910</option>
+<option value="1905">1905</option>
+<option value="1900">1900</option>
+<option value="1895">1895</option>
+<option value="1890">1890</option>
+<option value="1885">1885</option>
+<option value="1880">1880</option>
+<option value="1875">1875</option>
+<option value="1870">1870</option>
+<option value="1865">1865</option>
+<option value="1860">1860</option>
+<option value="1855">1855</option>
+<option value="1850">1850</option>
+<option value="1845">1845</option>
+<option value="1840">1840</option>
+<option value="1835">1835</option>
+<option value="1830">1830</option>
+<option value="1825">1825</option>
+<option value="1820">1820</option>
+<option value="1815">1815</option>
+<option value="1810">1810</option>
+<option value="1805">1805</option>
+<option value="1800">1800</option>
+<option value="1795">1795</option>
+<option value="1790">1790</option>
+<option value="1785">1785</option>
+<option value="1780">1780</option>
+<option value="1775">1775</option>
+<option value="1770">1770</option>
+<option value="1765">1765</option>
+<option value="1760">1760</option>
+<option value="1755">1755</option>
+<option value="1750">1750</option>
+<option value="1745">1745</option>
+<option value="1740">1740</option>
+<option value="1735">1735</option>
+<option value="1730">1730</option>
+<option value="1725">1725</option>
+<option value="1720">1720</option>
+<option value="1715">1715</option>
+<option value="1710">1710</option>
+<option value="1705">1705</option>
+<option value="1700">1700</option>
+<option value="1695">1695</option>
+<option value="1690">1690</option>
+<option value="1685">1685</option>
+<option value="1680">1680</option>
+<option value="1675">1675</option>
+<option value="1670">1670</option>
+<option value="1665">1665</option>
+<option value="1660">1660</option>
+<option value="1655">1655</option>
+<option value="1650">1650</option>
+<option value="1645">1645</option>
+<option value="1640">1640</option>
+<option value="1635">1635</option>
+<option value="1630">1630</option>
+<option value="1625">1625</option>
+<option value="1620">1620</option>
+<option value="1615">1615</option>
+<option value="1610">1610</option>
+<option value="1605">1605</option>
+<option value="1600">1600</option>
+<option value="1595">1595</option>
+<option value="1590">1590</option>
+<option value="1585">1585</option>
+<option value="1580">1580</option>
+<option value="1575">1575</option>
+<option value="1570">1570</option>
+<option value="1565">1565</option>
+<option value="1560">1560</option>
+<option value="1555">1555</option>
+<option value="1550">1550</option>
+<option value="1545">1545</option>
+<option value="1540">1540</option>
+<option value="1535">1535</option>
+<option value="1530">1530</option>
+<option value="1525">1525</option>
+<option value="1520">1520</option>
+<option value="1515">1515</option>
+<option value="1510">1510</option>
+<option value="1505">1505</option>
+<option value="1500">1500</option>
+<option value="1495">1495</option>
+<option value="1490">1490</option>
+<option value="1485">1485</option>
+<option value="1480">1480</option>
+<option value="1475">1475</option>
+<option value="1470">1470</option>
+<option value="1465">1465</option>
+<option value="1460">1460</option>
+<option value="1455">1455</option>
+<option value="1450">1450</option>
+<option value="1445">1445</option>
+<option value="1440">1440</option>
+<option value="1435">1435</option>
+<option value="1430">1430</option>
+<option value="1425">1425</option>
+<option value="1420">1420</option>
+<option value="1415">1415</option>
+<option value="1410">1410</option>
+<option value="1405">1405</option>
+<option value="1400">1400</option>
+<option value="1395">1395</option>
+<option value="1390">1390</option>
+<option value="1385">1385</option>
+<option value="1380">1380</option>
+<option value="1375">1375</option>
+<option value="1370">1370</option>
+<option value="1365">1365</option>
+<option value="1360">1360</option>
+<option value="1355">1355</option>
+<option value="1350">1350</option>
+<option value="1345">1345</option>
+<option value="1340">1340</option>
+<option value="1335">1335</option>
+<option value="1330">1330</option>
+<option value="1325">1325</option>
+<option value="1320">1320</option>
+<option value="1315">1315</option>
+<option value="1310">1310</option>
+<option value="1305">1305</option>
+<option value="1300">1300</option>
+<option value="1295">1295</option>
+<option value="1290">1290</option>
+<option value="1285">1285</option>
+<option value="1280">1280</option>
+<option value="1275">1275</option>
+<option value="1270">1270</option>
+<option value="1265">1265</option>
+<option value="1260">1260</option>
+<option value="1255">1255</option>
+<option value="1250">1250</option>
+<option value="1245">1245</option>
+<option value="1240">1240</option>
+<option value="1235">1235</option>
+<option value="1230">1230</option>
+<option value="1225">1225</option>
+<option value="1220">1220</option>
+<option value="1215">1215</option>
+<option value="1210">1210</option>
+<option value="1205">1205</option>
+<option value="1200">1200</option>
+<option value="1195">1195</option>
+<option value="1190">1190</option>
+<option value="1185">1185</option>
+<option value="1180">1180</option>
+<option value="1175">1175</option>
+<option value="1170">1170</option>
+<option value="1165">1165</option>
+<option value="1160">1160</option>
+<option value="1155">1155</option>
+<option value="1150">1150</option>
+<option value="1145">1145</option>
+<option value="1140">1140</option>
+<option value="1135">1135</option>
+<option value="1130">1130</option>
+<option value="1125">1125</option>
+<option value="1120">1120</option>
+<option value="1115">1115</option>
+<option value="1110">1110</option>
+<option value="1105">1105</option>
+<option value="1100">1100</option>
+<option value="1095">1095</option>
+<option value="1090">1090</option>
+<option value="1085">1085</option>
+<option value="1080">1080</option>
+<option value="1075">1075</option>
+<option value="1070">1070</option>
+<option value="1065">1065</option>
+<option value="1060">1060</option>
+<option value="1055">1055</option>
+<option value="1050">1050</option>
+<option value="1045">1045</option>
+<option value="1040">1040</option>
+<option value="1035">1035</option>
+<option value="1030">1030</option>
+<option value="1025">1025</option>
+<option value="1020">1020</option>
+<option value="1015">1015</option>
+<option value="1010">1010</option>
+<option value="1005">1005</option>
+<option value="1000">1000</option></select></div></div>
+      <a class="btn btn-secondary date-filter-form-submit">Filter</a>
+</form>
+    <div id="reading_stats_container" style="display: none;">
+      <div class="d-flex bg-secondary pt-2 align-items-center border rounded text-white mt-4 mb-2">
+        <h3 class="fs-6 ms-2">Reading Statistics</h3>
+      </div>
+      <p class="small-text">
+        Click the button below to see how many of these books you've read!
+      </p>
+
+      <div class="user_reading_stats">
+  <form data-turbo-frame="user_reading_stats" action="/user_reading_stats" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="YTBg6AT_TRMeFGFVgxBj1X71RnpSDSaMRa65sq0ZGzmdvSEae5EnT_7JeM70YT-nSgLfkvG32i6NkhpuCsT1Og" autocomplete="off">
+    
+
+
+
+
+
+    <button name="button" type="submit" class="btn btn-outline-primary btn-sm d-block w-100 text-center">
+      Show Reading Stats
+</button></form></div>
+    </div>
+
+    <div class="d-flex bg-secondary pt-2 align-items-center border rounded text-white mt-4 mb-2">
+  <h3 class="fs-6 ms-2">Download</h3>
+</div>
+<p class="small-text">
+  If you're interested in downloading this list as a CSV file for use in a spreadsheet application, you can easily do so by clicking the button below. Please note that to ensure a manageable file size and faster download, the CSV will include details for only the first 500 books.
+</p>
+<a href="https://thegreatestbooks.org/the-greatest-books.html.csv" rel="nofollow" class="btn btn-outline-primary btn-sm">
+  <i class="bi bi-file-arrow-down-fill"></i> Download
+</a>
+    <div class="multiplex-sidebar-ads pt-5"><ins class="adsbygoogle" style="display: block; height: 1224px;" data-ad-client="ca-pub-2193700692946691" data-ad-slot="6565573962" data-ad-format="autorelaxed" data-adsbygoogle-status="done" data-ad-status="filled"><div id="aswift_1_host" style="border: medium; height: 1224px; width: 356px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block;"><iframe id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;border:0;width:356px;height:1224px;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="356" height="1224" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-2193700692946691&amp;output=html&amp;h=1224&amp;slotname=6565573962&amp;adk=483860732&amp;adf=349682461&amp;pi=t.ma~as.6565573962&amp;w=356&amp;cr_col=1&amp;cr_row=13&amp;fwrn=2&amp;lmt=1714367442&amp;rafmt=9&amp;format=356x1224&amp;url=https%3A%2F%2Fthegreatestbooks.org%2Fthe-greatest-books&amp;crui=image_sidebyside&amp;fwr=0&amp;wgl=1&amp;dt=1714372092755&amp;bpp=1&amp;bdt=1345&amp;idt=243&amp;shv=r20240425&amp;mjsv=m202404230101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;eoidce=1&amp;prev_fmts=0x0&amp;nras=1&amp;correlator=2950824189713&amp;frm=20&amp;pv=1&amp;ga_vid=813341461.1714372092&amp;ga_sid=1714372093&amp;ga_hid=1387125083&amp;ga_fc=1&amp;u_tz=-240&amp;u_his=50&amp;u_h=1080&amp;u_w=1920&amp;u_ah=1040&amp;u_aw=1920&amp;u_cd=24&amp;u_sd=1&amp;adx=834&amp;ady=2195&amp;biw=1263&amp;bih=851&amp;scr_x=0&amp;scr_y=0&amp;eid=44759876%2C44759927%2C44759842%2C31082703%2C31083013%2C44795922%2C95331042%2C95331556&amp;oid=2&amp;pvsid=2557779671655703&amp;tmod=1433868995&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=4%2C4%2C4%2C4%2C1920%2C0%2C1292%2C942%2C1280%2C851&amp;vis=1&amp;rsz=%7C%7CeEbr%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;bz=1.01&amp;ifi=2&amp;uci=a!2&amp;btvi=1&amp;fsb=1&amp;dtd=246" data-google-container-id="a!2" tabindex="0" title="Advertisement" aria-label="Advertisement" data-google-query-id="CJHUyt7l5oUDFewFTwgdU7wNCQ" data-load-complete="true"></iframe></div></ins></div>
+  </div>
+</div>
+
+
+
+  <!-- This is the main content area -->
+  <div class="col-lg-8 order-lg-1 order-2 pe-3" style="height: auto !important;">
+    <div class="horizontal-ad-space-1"><ins class="adsbygoogle" style="display: block; height: 280px;" data-ad-client="ca-pub-2193700692946691" data-ad-slot="4627490543" data-ad-format="auto" data-full-width-responsive="true" data-adsbygoogle-status="done" data-ad-status="filled"><div id="aswift_2_host" style="border: medium; height: 280px; width: 732px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block; overflow: visible;"><iframe id="aswift_2" name="aswift_2" style="left:0;position:absolute;top:0;border:0;width:732px;height:280px;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="732" height="280" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-2193700692946691&amp;output=html&amp;h=280&amp;slotname=4627490543&amp;adk=2310472208&amp;adf=567823629&amp;pi=t.ma~as.4627490543&amp;w=732&amp;fwrn=4&amp;fwrnh=100&amp;lmt=1714367442&amp;rafmt=1&amp;format=732x280&amp;url=https%3A%2F%2Fthegreatestbooks.org%2Fthe-greatest-books&amp;fwr=0&amp;fwrattr=true&amp;rpe=1&amp;resp_fmts=3&amp;wgl=1&amp;dt=1714372092803&amp;bpp=1&amp;bdt=1394&amp;idt=200&amp;shv=r20240425&amp;mjsv=m202404230101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;eoidce=1&amp;prev_fmts=0x0%2C356x1224&amp;nras=1&amp;correlator=2950824189713&amp;frm=20&amp;pv=1&amp;ga_vid=813341461.1714372092&amp;ga_sid=1714372093&amp;ga_hid=1387125083&amp;ga_fc=1&amp;u_tz=-240&amp;u_his=50&amp;u_h=1080&amp;u_w=1920&amp;u_ah=1040&amp;u_aw=1920&amp;u_cd=24&amp;u_sd=1&amp;adx=74&amp;ady=259&amp;biw=1263&amp;bih=851&amp;scr_x=0&amp;scr_y=0&amp;eid=44759876%2C44759927%2C44759842%2C31082703%2C31083013%2C44795922%2C95331042%2C95331556&amp;oid=2&amp;pvsid=2557779671655703&amp;tmod=1433868995&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=4%2C4%2C4%2C4%2C1920%2C0%2C1292%2C942%2C1280%2C851&amp;vis=1&amp;rsz=%7C%7CeE%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;bz=1.01&amp;ifi=3&amp;uci=a!3&amp;fsb=1&amp;dtd=203" data-google-container-id="a!3" tabindex="0" title="Advertisement" aria-label="Advertisement" data-google-query-id="COPwyd7l5oUDFY4yTwgd39sHBQ" data-load-complete="true"></iframe></div></ins></div>
+    <div id="book-list-container">
+      <ol class="list-group list-group-flush">
+    <li class="list-group-item book-list-item p-0 pt-3" data-book="266">
+      <div class="row">
+  <div class="col">
+    <h4>
+        1. <a data-turbo-frame="_top" href="/books/266">One Hundred Years of Solitude</a>
+         by <a data-turbo-frame="_top" href="/authors/4822">Gabriel Garcia Marquez</a>
+    </h4>
+    <div class="ps-3 ps-3">
+      <div class="float-start me-3 default-book-image">
+        <a aria_label="View details about 'One Hundred Years of Solitude' by Gabriel Garcia Marquez" href="/books/266">
+          <img alt="Cover of 'One Hundred Years of Solitude' by Gabriel Garcia Marquez" src="https://images.thegreatestbooks.org/nkfaeq8vlliz3jbdkt38km3w7jr5">
+</a>      </div>
+      <div>
+        <p>
+          This novel is a multi-generational saga that focuses on the Buendía family, who founded the fictional town of Macondo. It explores themes of love, loss, family, and the cyclical nature of history. The story is filled with magical realism, blending the supernatural with the ordinary, as it chronicles the family's experiences, including civil war, marriages, births, and deaths. The book is renowned for its narrative style and its exploration of solitude, fate, and the inevitability of repetition in history.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row bd-highlight mb-2" id="user-book-actions-container-266">
+      <div class="p-2 bd-highlight">
+        <div class="dropdown">
+  <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="add-to-list-btn" data-bs-toggle="dropdown" aria-expanded="false">
+    Add to a List
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="add-to-list-btn">
+    <turbo-frame id="user-lists-index">
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I'm Reading" class="dropdown-item">Books I'm Reading</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I Want to Read" class="dropdown-item">Books I Want to Read</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I've Read" class="dropdown-item">Books I've Read</a></li>
+    </turbo-frame>    
+  </ul>
+</div>
+
+      </div>
+      <div class="p-2 bd-highlight">
+        <div id="review_266">
+    <a data-bs-toggle="modal" data-bs-target="#authModal" class="btn btn-outline-primary btn-sm" href="#">Review</a>
+</div>
+        <div id="review_modal_266"></div>
+      </div>
+      <div class="p-2 bd-highlight">
+        <a class="btn btn-outline-primary btn-sm" data-purchase-button-url-value="/books/266/editions" data-controller="purchase-button" data-action="click->purchase-button#loadData" href="#">Purchase</a>
+      </div>
+    </div>
+</div>
+    </li>
+    <li class="list-group-item book-list-item p-0 pt-3" data-book="38">
+      <div class="row">
+  <div class="col">
+    <h4>
+        2. <a data-turbo-frame="_top" href="/books/38">The Great Gatsby</a>
+         by <a data-turbo-frame="_top" href="/authors/4672">F. Scott Fitzgerald</a>
+    </h4>
+    <div class="ps-3 ps-3">
+      <div class="float-start me-3 default-book-image">
+        <a aria_label="View details about 'The Great Gatsby' by F. Scott Fitzgerald" href="/books/38">
+          <img alt="Cover of 'The Great Gatsby' by F. Scott Fitzgerald" src="https://images.thegreatestbooks.org/xqzw71cq0cfn1s0ganth5b7x09ec">
+</a>      </div>
+      <div>
+        <p>
+          Set in the summer of 1922, the novel follows the life of a young and mysterious millionaire, his extravagant lifestyle in Long Island, and his obsessive love for a beautiful former debutante. As the story unfolds, the millionaire's dark secrets and the corrupt reality of the American dream during the Jazz Age are revealed. The narrative is a critique of the hedonistic excess and moral decay of the era, ultimately leading to tragic consequences.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row bd-highlight mb-2" id="user-book-actions-container-38">
+      <div class="p-2 bd-highlight">
+        <div class="dropdown">
+  <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="add-to-list-btn" data-bs-toggle="dropdown" aria-expanded="false">
+    Add to a List
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="add-to-list-btn">
+    <turbo-frame id="user-lists-index">
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I'm Reading" class="dropdown-item">Books I'm Reading</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I Want to Read" class="dropdown-item">Books I Want to Read</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I've Read" class="dropdown-item">Books I've Read</a></li>
+    </turbo-frame>    
+  </ul>
+</div>
+
+      </div>
+      <div class="p-2 bd-highlight">
+        <div id="review_38">
+    <a data-bs-toggle="modal" data-bs-target="#authModal" class="btn btn-outline-primary btn-sm" href="#">Review</a>
+</div>
+        <div id="review_modal_38"></div>
+      </div>
+      <div class="p-2 bd-highlight">
+        <a class="btn btn-outline-primary btn-sm" data-purchase-button-url-value="/books/38/editions" data-controller="purchase-button" data-action="click->purchase-button#loadData" href="#">Purchase</a>
+      </div>
+    </div>
+</div>
+    </li>
+    <li class="list-group-item book-list-item p-0 pt-3" data-book="122">
+      <div class="row">
+  <div class="col">
+    <h4>
+        3. <a data-turbo-frame="_top" href="/books/122">Ulysses</a>
+         by <a data-turbo-frame="_top" href="/authors/4743">James Joyce</a>
+    </h4>
+    <div class="ps-3 ps-3">
+      <div class="float-start me-3 default-book-image">
+        <a aria_label="View details about 'Ulysses' by James Joyce" href="/books/122">
+          <img alt="Cover of 'Ulysses' by James Joyce" src="https://images.thegreatestbooks.org/9vecj2fz5246xa3c5c7slr4y7kyl">
+</a>      </div>
+      <div>
+        <p>
+          Set in Dublin, the novel follows a day in the life of Leopold Bloom, an advertising salesman, as he navigates the city. The narrative, heavily influenced by Homer's Odyssey, explores themes of identity, heroism, and the complexities of everyday life. It is renowned for its stream-of-consciousness style and complex structure, making it a challenging but rewarding read.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row bd-highlight mb-2" id="user-book-actions-container-122">
+      <div class="p-2 bd-highlight">
+        <div class="dropdown">
+  <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="add-to-list-btn" data-bs-toggle="dropdown" aria-expanded="false">
+    Add to a List
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="add-to-list-btn">
+    <turbo-frame id="user-lists-index">
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I'm Reading" class="dropdown-item">Books I'm Reading</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I Want to Read" class="dropdown-item">Books I Want to Read</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I've Read" class="dropdown-item">Books I've Read</a></li>
+    </turbo-frame>    
+  </ul>
+</div>
+
+      </div>
+      <div class="p-2 bd-highlight">
+        <div id="review_122">
+    <a data-bs-toggle="modal" data-bs-target="#authModal" class="btn btn-outline-primary btn-sm" href="#">Review</a>
+</div>
+        <div id="review_modal_122"></div>
+      </div>
+      <div class="p-2 bd-highlight">
+        <a class="btn btn-outline-primary btn-sm" data-purchase-button-url-value="/books/122/editions" data-controller="purchase-button" data-action="click->purchase-button#loadData" href="#">Purchase</a>
+      </div>
+    </div>
+</div>
+    </li>
+    <li class="list-group-item book-list-item p-0 pt-3" data-book="64">
+      <div class="row">
+  <div class="col">
+    <h4>
+        4. <a data-turbo-frame="_top" href="/books/64">Nineteen Eighty Four</a>
+         by <a data-turbo-frame="_top" href="/authors/4640">George Orwell</a>
+    </h4>
+    <div class="ps-3 ps-3">
+      <div class="float-start me-3 default-book-image">
+        <a aria_label="View details about 'Nineteen Eighty Four' by George Orwell" href="/books/64">
+          <img alt="Cover of 'Nineteen Eighty Four' by George Orwell" src="https://images.thegreatestbooks.org/zmpdbqifpr5hp12srnqxf4kknb7i">
+</a>      </div>
+      <div>
+        <p>
+          Set in a dystopian future, the novel presents a society under the total control of a totalitarian regime, led by the omnipresent Big Brother. The protagonist, a low-ranking member of 'the Party', begins to question the regime and falls in love with a woman, an act of rebellion in a world where independent thought, dissent, and love are prohibited. The novel explores themes of surveillance, censorship, and the manipulation of truth.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row bd-highlight mb-2" id="user-book-actions-container-64">
+      <div class="p-2 bd-highlight">
+        <div class="dropdown">
+  <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="add-to-list-btn" data-bs-toggle="dropdown" aria-expanded="false">
+    Add to a List
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="add-to-list-btn">
+    <turbo-frame id="user-lists-index">
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I'm Reading" class="dropdown-item">Books I'm Reading</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I Want to Read" class="dropdown-item">Books I Want to Read</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I've Read" class="dropdown-item">Books I've Read</a></li>
+    </turbo-frame>    
+  </ul>
+</div>
+
+      </div>
+      <div class="p-2 bd-highlight">
+        <div id="review_64">
+    <a data-bs-toggle="modal" data-bs-target="#authModal" class="btn btn-outline-primary btn-sm" href="#">Review</a>
+</div>
+        <div id="review_modal_64"></div>
+      </div>
+      <div class="p-2 bd-highlight">
+        <a class="btn btn-outline-primary btn-sm" data-purchase-button-url-value="/books/64/editions" data-controller="purchase-button" data-action="click->purchase-button#loadData" href="#">Purchase</a>
+      </div>
+    </div>
+</div>
+    </li>
+    <li class="list-group-item book-list-item p-0 pt-3" data-book="19">
+        <div class="in-feed-ad-slot" style="padding-bottom: 1.5rem;"><ins class="adsbygoogle" style="display: block; height: 195px;" data-ad-client="ca-pub-2193700692946691" data-ad-slot="2895606476" data-ad-format="fluid" data-ad-layout-key="-f1+12-48-f0+16z" data-adsbygoogle-status="done" data-ad-status="filled"><div id="aswift_3_host" style="border: medium; height: 195px; width: 732px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block;"><iframe id="aswift_3" name="aswift_3" style="left:0;position:absolute;top:0;border:0;width:732px;height:195px;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="732" height="195" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-2193700692946691&amp;output=html&amp;h=195&amp;slotname=2895606476&amp;adk=3799648208&amp;adf=2526889909&amp;pi=t.ma~as.2895606476&amp;w=732&amp;lmt=1714367442&amp;rafmt=11&amp;format=732x195&amp;url=https%3A%2F%2Fthegreatestbooks.org%2Fthe-greatest-books&amp;wgl=1&amp;dt=1714372092804&amp;bpp=1&amp;bdt=1395&amp;idt=221&amp;shv=r20240425&amp;mjsv=m202404230101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;eoidce=1&amp;prev_fmts=0x0%2C356x1224%2C732x280&amp;nras=1&amp;correlator=2950824189713&amp;frm=20&amp;pv=1&amp;ga_vid=813341461.1714372092&amp;ga_sid=1714372093&amp;ga_hid=1387125083&amp;ga_fc=1&amp;u_tz=-240&amp;u_his=50&amp;u_h=1080&amp;u_w=1920&amp;u_ah=1040&amp;u_aw=1920&amp;u_cd=24&amp;u_sd=1&amp;adx=74&amp;ady=1731&amp;biw=1263&amp;bih=851&amp;scr_x=0&amp;scr_y=0&amp;eid=44759876%2C44759927%2C44759842%2C31082703%2C31083013%2C44795922%2C95331042%2C95331556&amp;oid=2&amp;pvsid=2557779671655703&amp;tmod=1433868995&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=4%2C4%2C4%2C4%2C1920%2C0%2C1292%2C942%2C1280%2C851&amp;vis=1&amp;rsz=%7C%7CeEbr%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;bz=1.01&amp;ifi=4&amp;uci=a!4&amp;btvi=2&amp;fsb=1&amp;dtd=224" data-google-container-id="a!4" tabindex="0" title="Advertisement" aria-label="Advertisement" data-google-query-id="CK_Ozt7l5oUDFRu80QQduN0M3A" data-load-complete="true"></iframe></div></ins></div>
+      <div class="row">
+  <div class="col">
+    <h4>
+        5. <a data-turbo-frame="_top" href="/books/19">The Catcher in the Rye</a>
+         by <a data-turbo-frame="_top" href="/authors/4654">J. D. Salinger</a>
+    </h4>
+    <div class="ps-3 ps-3">
+      <div class="float-start me-3 default-book-image">
+        <a aria_label="View details about 'The Catcher in the Rye' by J. D. Salinger" href="/books/19">
+          <img alt="Cover of 'The Catcher in the Rye' by J. D. Salinger" src="https://images.thegreatestbooks.org/n2y1vprl2fpyll8onir6bhnbcdfo">
+</a>      </div>
+      <div>
+        <p>
+          The novel follows the story of a teenager named Holden Caulfield, who has just been expelled from his prep school. The narrative unfolds over the course of three days, during which Holden experiences various forms of alienation and his mental state continues to unravel. He criticizes the adult world as "phony" and struggles with his own transition into adulthood. The book is a profound exploration of teenage rebellion, alienation, and the loss of innocence.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row bd-highlight mb-2" id="user-book-actions-container-19">
+      <div class="p-2 bd-highlight">
+        <div class="dropdown">
+  <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="add-to-list-btn" data-bs-toggle="dropdown" aria-expanded="false">
+    Add to a List
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="add-to-list-btn">
+    <turbo-frame id="user-lists-index">
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I'm Reading" class="dropdown-item">Books I'm Reading</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I Want to Read" class="dropdown-item">Books I Want to Read</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I've Read" class="dropdown-item">Books I've Read</a></li>
+    </turbo-frame>    
+  </ul>
+</div>
+
+      </div>
+      <div class="p-2 bd-highlight">
+        <div id="review_19">
+    <a data-bs-toggle="modal" data-bs-target="#authModal" class="btn btn-outline-primary btn-sm" href="#">Review</a>
+</div>
+        <div id="review_modal_19"></div>
+      </div>
+      <div class="p-2 bd-highlight">
+        <a class="btn btn-outline-primary btn-sm" data-purchase-button-url-value="/books/19/editions" data-controller="purchase-button" data-action="click->purchase-button#loadData" href="#">Purchase</a>
+      </div>
+    </div>
+</div>
+    </li>
+    <li class="list-group-item book-list-item p-0 pt-3" data-book="225">
+      <div class="row">
+  <div class="col">
+    <h4>
+        6. <a data-turbo-frame="_top" href="/books/225">In Search of Lost Time</a>
+         by <a data-turbo-frame="_top" href="/authors/4798">Marcel Proust</a>
+    </h4>
+    <div class="ps-3 ps-3">
+      <div class="float-start me-3 default-book-image">
+        <a aria_label="View details about 'In Search of Lost Time' by Marcel Proust" href="/books/225">
+          <img alt="Cover of 'In Search of Lost Time' by Marcel Proust" src="https://images.thegreatestbooks.org/sg0ytun7phyv9c4q5772nqvgjpyb">
+</a>      </div>
+      <div>
+        <p>
+          This renowned novel is a sweeping exploration of memory, love, art, and the passage of time, told through the narrator's recollections of his childhood and experiences into adulthood in the late 19th and early 20th century aristocratic France. The narrative is notable for its lengthy and intricate involuntary memory episodes, the most famous being the "madeleine episode". It explores the themes of time, space and memory, but also raises questions about the nature of art and literature, and the complex relationships between love, sexuality, and possession.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row bd-highlight mb-2" id="user-book-actions-container-225">
+      <div class="p-2 bd-highlight">
+        <div class="dropdown">
+  <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="add-to-list-btn" data-bs-toggle="dropdown" aria-expanded="false">
+    Add to a List
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="add-to-list-btn">
+    <turbo-frame id="user-lists-index">
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I'm Reading" class="dropdown-item">Books I'm Reading</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I Want to Read" class="dropdown-item">Books I Want to Read</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I've Read" class="dropdown-item">Books I've Read</a></li>
+    </turbo-frame>    
+  </ul>
+</div>
+
+      </div>
+      <div class="p-2 bd-highlight">
+        <div id="review_225">
+    <a data-bs-toggle="modal" data-bs-target="#authModal" class="btn btn-outline-primary btn-sm" href="#">Review</a>
+</div>
+        <div id="review_modal_225"></div>
+      </div>
+      <div class="p-2 bd-highlight">
+        <a class="btn btn-outline-primary btn-sm" data-purchase-button-url-value="/books/225/editions" data-controller="purchase-button" data-action="click->purchase-button#loadData" href="#">Purchase</a>
+      </div>
+    </div>
+</div>
+    </li>
+    <li class="list-group-item book-list-item p-0 pt-3" data-book="50">
+      <div class="row">
+  <div class="col">
+    <h4>
+        7. <a data-turbo-frame="_top" href="/books/50">Lolita</a>
+         by <a data-turbo-frame="_top" href="/authors/4682">Vladimir Nabokov</a>
+    </h4>
+    <div class="ps-3 ps-3">
+      <div class="float-start me-3 default-book-image">
+        <a aria_label="View details about 'Lolita' by Vladimir Nabokov" href="/books/50">
+          <img alt="Cover of 'Lolita' by Vladimir Nabokov" src="https://images.thegreatestbooks.org/m6joa4g7x5chqlami3qq3id9mt85">
+</a>      </div>
+      <div>
+        <p>
+          The novel tells the story of Humbert Humbert, a man with a disturbing obsession for young girls, or "nymphets" as he calls them. His obsession leads him to engage in a manipulative and destructive relationship with his 12-year-old stepdaughter, Lolita. The narrative is a controversial exploration of manipulation, obsession, and unreliable narration, as Humbert attempts to justify his actions and feelings throughout the story.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row bd-highlight mb-2" id="user-book-actions-container-50">
+      <div class="p-2 bd-highlight">
+        <div class="dropdown">
+  <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="add-to-list-btn" data-bs-toggle="dropdown" aria-expanded="false">
+    Add to a List
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="add-to-list-btn">
+    <turbo-frame id="user-lists-index">
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I'm Reading" class="dropdown-item">Books I'm Reading</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I Want to Read" class="dropdown-item">Books I Want to Read</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I've Read" class="dropdown-item">Books I've Read</a></li>
+    </turbo-frame>    
+  </ul>
+</div>
+
+      </div>
+      <div class="p-2 bd-highlight">
+        <div id="review_50">
+    <a data-bs-toggle="modal" data-bs-target="#authModal" class="btn btn-outline-primary btn-sm" href="#">Review</a>
+</div>
+        <div id="review_modal_50"></div>
+      </div>
+      <div class="p-2 bd-highlight">
+        <a class="btn btn-outline-primary btn-sm" data-purchase-button-url-value="/books/50/editions" data-controller="purchase-button" data-action="click->purchase-button#loadData" href="#">Purchase</a>
+      </div>
+    </div>
+</div>
+    </li>
+    <li class="list-group-item book-list-item p-0 pt-3" data-book="91">
+      <div class="row">
+  <div class="col">
+    <h4>
+        8. <a data-turbo-frame="_top" href="/books/91">To Kill a Mockingbird</a>
+         by <a data-turbo-frame="_top" href="/authors/4717">Harper Lee</a>
+    </h4>
+    <div class="ps-3 ps-3">
+      <div class="float-start me-3 default-book-image">
+        <a aria_label="View details about 'To Kill a Mockingbird' by Harper Lee" href="/books/91">
+          <img alt="Cover of 'To Kill a Mockingbird' by Harper Lee" src="https://images.thegreatestbooks.org/ar8sz6exbi03loyfxhw58rflwo9n">
+</a>      </div>
+      <div>
+        <p>
+          Set in the racially charged South during the Depression, the novel follows a young girl and her older brother as they navigate their small town's societal norms and prejudices. Their father, a lawyer, is appointed to defend a black man falsely accused of raping a white woman, forcing the children to confront the harsh realities of racism and injustice. The story explores themes of morality, innocence, and the loss of innocence through the eyes of the young protagonists.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row bd-highlight mb-2" id="user-book-actions-container-91">
+      <div class="p-2 bd-highlight">
+        <div class="dropdown">
+  <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="add-to-list-btn" data-bs-toggle="dropdown" aria-expanded="false">
+    Add to a List
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="add-to-list-btn">
+    <turbo-frame id="user-lists-index">
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I'm Reading" class="dropdown-item">Books I'm Reading</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I Want to Read" class="dropdown-item">Books I Want to Read</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I've Read" class="dropdown-item">Books I've Read</a></li>
+    </turbo-frame>    
+  </ul>
+</div>
+
+      </div>
+      <div class="p-2 bd-highlight">
+        <div id="review_91">
+    <a data-bs-toggle="modal" data-bs-target="#authModal" class="btn btn-outline-primary btn-sm" href="#">Review</a>
+</div>
+        <div id="review_modal_91"></div>
+      </div>
+      <div class="p-2 bd-highlight">
+        <a class="btn btn-outline-primary btn-sm" data-purchase-button-url-value="/books/91/editions" data-controller="purchase-button" data-action="click->purchase-button#loadData" href="#">Purchase</a>
+      </div>
+    </div>
+</div>
+    </li>
+    <li class="list-group-item book-list-item p-0 pt-3" data-book="208">
+      <div class="row">
+  <div class="col">
+    <h4>
+        9. <a data-turbo-frame="_top" href="/books/208">Moby Dick</a>
+         by <a data-turbo-frame="_top" href="/authors/4783">Herman Melville</a>
+    </h4>
+    <div class="ps-3 ps-3">
+      <div class="float-start me-3 default-book-image">
+        <a aria_label="View details about 'Moby Dick' by Herman Melville" href="/books/208">
+          <img alt="Cover of 'Moby Dick' by Herman Melville" src="https://images.thegreatestbooks.org/5ntsznzrzuoakqhhbxi9phqhmkgt">
+</a>      </div>
+      <div>
+        <p>
+          The novel is a detailed narrative of a vengeful sea captain's obsessive quest to hunt down a giant white sperm whale that bit off his leg. The captain's relentless pursuit, despite the warnings and concerns of his crew, leads them on a dangerous journey across the seas. The story is a complex exploration of good and evil, obsession, and the nature of reality, filled with rich descriptions of whaling and the sea.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row bd-highlight mb-2" id="user-book-actions-container-208">
+      <div class="p-2 bd-highlight">
+        <div class="dropdown">
+  <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="add-to-list-btn" data-bs-toggle="dropdown" aria-expanded="false">
+    Add to a List
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="add-to-list-btn">
+    <turbo-frame id="user-lists-index">
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I'm Reading" class="dropdown-item">Books I'm Reading</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I Want to Read" class="dropdown-item">Books I Want to Read</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I've Read" class="dropdown-item">Books I've Read</a></li>
+    </turbo-frame>    
+  </ul>
+</div>
+
+      </div>
+      <div class="p-2 bd-highlight">
+        <div id="review_208">
+    <a data-bs-toggle="modal" data-bs-target="#authModal" class="btn btn-outline-primary btn-sm" href="#">Review</a>
+</div>
+        <div id="review_modal_208"></div>
+      </div>
+      <div class="p-2 bd-highlight">
+        <a class="btn btn-outline-primary btn-sm" data-purchase-button-url-value="/books/208/editions" data-controller="purchase-button" data-action="click->purchase-button#loadData" href="#">Purchase</a>
+      </div>
+    </div>
+</div>
+    </li>
+    <li class="list-group-item book-list-item p-0 pt-3" data-book="102">
+        <div class="in-feed-ad-slot" style="padding-bottom: 1.5rem;"><ins class="adsbygoogle" style="display: block; height: 195px;" data-ad-client="ca-pub-2193700692946691" data-ad-slot="2895606476" data-ad-format="fluid" data-ad-layout-key="-f1+12-48-f0+16z" data-adsbygoogle-status="done" data-ad-status="filled"><div id="aswift_4_host" style="border: medium; height: 195px; width: 732px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block;"><iframe id="aswift_4" name="aswift_4" style="left:0;position:absolute;top:0;border:0;width:732px;height:195px;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="732" height="195" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-2193700692946691&amp;output=html&amp;h=195&amp;slotname=2895606476&amp;adk=3799648208&amp;adf=2961771967&amp;pi=t.ma~as.2895606476&amp;w=732&amp;lmt=1714367442&amp;rafmt=11&amp;format=732x195&amp;url=https%3A%2F%2Fthegreatestbooks.org%2Fthe-greatest-books&amp;wgl=1&amp;dt=1714372092805&amp;bpp=1&amp;bdt=1396&amp;idt=228&amp;shv=r20240425&amp;mjsv=m202404230101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;eoidce=1&amp;prev_fmts=0x0%2C356x1224%2C732x280%2C732x195&amp;nras=1&amp;correlator=2950824189713&amp;frm=20&amp;pv=1&amp;ga_vid=813341461.1714372092&amp;ga_sid=1714372093&amp;ga_hid=1387125083&amp;ga_fc=1&amp;u_tz=-240&amp;u_his=50&amp;u_h=1080&amp;u_w=1920&amp;u_ah=1040&amp;u_aw=1920&amp;u_cd=24&amp;u_sd=1&amp;adx=74&amp;ady=3390&amp;biw=1263&amp;bih=851&amp;scr_x=0&amp;scr_y=0&amp;eid=44759876%2C44759927%2C44759842%2C31082703%2C31083013%2C44795922%2C95331042%2C95331556&amp;oid=2&amp;pvsid=2557779671655703&amp;tmod=1433868995&amp;uas=0&amp;nvt=1&amp;fc=1920&amp;brdim=4%2C4%2C4%2C4%2C1920%2C0%2C1292%2C942%2C1280%2C851&amp;vis=1&amp;rsz=%7C%7CeEbr%7C&amp;abl=CS&amp;pfx=0&amp;fu=128&amp;bc=31&amp;bz=1.01&amp;ifi=5&amp;uci=a!5&amp;btvi=3&amp;fsb=1&amp;dtd=232" data-google-container-id="a!5" tabindex="0" title="Advertisement" aria-label="Advertisement" data-google-query-id="CM6Fz97l5oUDFSqEdwEdf2kF8A" data-load-complete="true"></iframe></div></ins></div>
+      <div class="row">
+  <div class="col">
+    <h4>
+        10. <a data-turbo-frame="_top" href="/books/102">Pride and Prejudice</a>
+         by <a data-turbo-frame="_top" href="/authors/4728">Jane Austen</a>
+    </h4>
+    <div class="ps-3 ps-3">
+      <div class="float-start me-3 default-book-image">
+        <a aria_label="View details about 'Pride and Prejudice' by Jane Austen" href="/books/102">
+          <img alt="Cover of 'Pride and Prejudice' by Jane Austen" src="https://images.thegreatestbooks.org/6rwjp2ip713ay6m8e8rtc7kszevc">
+</a>      </div>
+      <div>
+        <p>
+          Set in early 19th-century England, this classic novel revolves around the lives of the Bennet family, particularly the five unmarried daughters. The narrative explores themes of manners, upbringing, morality, education, and marriage within the society of the landed gentry. It follows the romantic entanglements of Elizabeth Bennet, the second eldest daughter, who is intelligent, lively, and quick-witted, and her tumultuous relationship with the proud, wealthy, and seemingly aloof Mr. Darcy. Their story unfolds as they navigate societal expectations, personal misunderstandings, and their own pride and prejudice.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row bd-highlight mb-2" id="user-book-actions-container-102">
+      <div class="p-2 bd-highlight">
+        <div class="dropdown">
+  <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="add-to-list-btn" data-bs-toggle="dropdown" aria-expanded="false">
+    Add to a List
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="add-to-list-btn">
+    <turbo-frame id="user-lists-index">
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I'm Reading" class="dropdown-item">Books I'm Reading</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I Want to Read" class="dropdown-item">Books I Want to Read</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I've Read" class="dropdown-item">Books I've Read</a></li>
+    </turbo-frame>    
+  </ul>
+</div>
+
+      </div>
+      <div class="p-2 bd-highlight">
+        <div id="review_102">
+    <a data-bs-toggle="modal" data-bs-target="#authModal" class="btn btn-outline-primary btn-sm" href="#">Review</a>
+</div>
+        <div id="review_modal_102"></div>
+      </div>
+      <div class="p-2 bd-highlight">
+        <a class="btn btn-outline-primary btn-sm" data-purchase-button-url-value="/books/102/editions" data-controller="purchase-button" data-action="click->purchase-button#loadData" href="#">Purchase</a>
+      </div>
+    </div>
+</div>
+    </li>
+    <li class="list-group-item book-list-item p-0 pt-3" data-book="108">
+      <div class="row">
+  <div class="col">
+    <h4>
+        11. <a data-turbo-frame="_top" href="/books/108">Wuthering Heights</a>
+         by <a data-turbo-frame="_top" href="/authors/4734">Emily Brontë</a>
+    </h4>
+    <div class="ps-3 ps-3">
+      <div class="float-start me-3 default-book-image">
+        <a aria_label="View details about 'Wuthering Heights' by Emily Brontë" href="/books/108">
+          <img alt="Cover of 'Wuthering Heights' by Emily Brontë" src="https://images.thegreatestbooks.org/bw95y9d86rh3hr3rf5rsg3xlnv35">
+</a>      </div>
+      <div>
+        <p>
+          This classic novel is a tale of love, revenge and social class set in the Yorkshire moors. It revolves around the intense, complex relationship between Catherine Earnshaw and Heathcliff, an orphan adopted by Catherine's father. Despite their deep affection for each other, Catherine marries Edgar Linton, a wealthy neighbor, leading Heathcliff to seek revenge on the two families. The story unfolds over two generations, reflecting the consequences of their choices and the destructive power of obsessive love.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row bd-highlight mb-2" id="user-book-actions-container-108">
+      <div class="p-2 bd-highlight">
+        <div class="dropdown">
+  <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="add-to-list-btn" data-bs-toggle="dropdown" aria-expanded="false">
+    Add to a List
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="add-to-list-btn">
+    <turbo-frame id="user-lists-index">
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I'm Reading" class="dropdown-item">Books I'm Reading</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I Want to Read" class="dropdown-item">Books I Want to Read</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I've Read" class="dropdown-item">Books I've Read</a></li>
+    </turbo-frame>    
+  </ul>
+</div>
+
+      </div>
+      <div class="p-2 bd-highlight">
+        <div id="review_108">
+    <a data-bs-toggle="modal" data-bs-target="#authModal" class="btn btn-outline-primary btn-sm" href="#">Review</a>
+</div>
+        <div id="review_modal_108"></div>
+      </div>
+      <div class="p-2 bd-highlight">
+        <a class="btn btn-outline-primary btn-sm" data-purchase-button-url-value="/books/108/editions" data-controller="purchase-button" data-action="click->purchase-button#loadData" href="#">Purchase</a>
+      </div>
+    </div>
+</div>
+    </li>
+    <li class="list-group-item book-list-item p-0 pt-3" data-book="190">
+      <div class="row">
+  <div class="col">
+    <h4>
+        12. <a data-turbo-frame="_top" href="/books/190">Don Quixote</a>
+         by <a data-turbo-frame="_top" href="/authors/4767">Miguel de Cervantes</a>
+    </h4>
+    <div class="ps-3 ps-3">
+      <div class="float-start me-3 default-book-image">
+        <a aria_label="View details about 'Don Quixote' by Miguel de Cervantes" href="/books/190">
+          <img alt="Cover of 'Don Quixote' by Miguel de Cervantes" src="https://images.thegreatestbooks.org/bbv4hn6u3743cf28g76ajvkrgrvn">
+</a>      </div>
+      <div>
+        <p>
+          This classic novel follows the adventures of a man who, driven mad by reading too many chivalric romances, decides to become a knight-errant and roam the world righting wrongs under the name Don Quixote. Accompanied by his loyal squire, Sancho Panza, he battles windmills he believes to be giants and champions the virtuous lady Dulcinea, who is in reality a simple peasant girl. The book is a richly layered critique of the popular literature of Cervantes' time and a profound exploration of reality and illusion, madness and sanity.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row bd-highlight mb-2" id="user-book-actions-container-190">
+      <div class="p-2 bd-highlight">
+        <div class="dropdown">
+  <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="add-to-list-btn" data-bs-toggle="dropdown" aria-expanded="false">
+    Add to a List
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="add-to-list-btn">
+    <turbo-frame id="user-lists-index">
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I'm Reading" class="dropdown-item">Books I'm Reading</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I Want to Read" class="dropdown-item">Books I Want to Read</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I've Read" class="dropdown-item">Books I've Read</a></li>
+    </turbo-frame>    
+  </ul>
+</div>
+
+      </div>
+      <div class="p-2 bd-highlight">
+        <div id="review_190">
+    <a data-bs-toggle="modal" data-bs-target="#authModal" class="btn btn-outline-primary btn-sm" href="#">Review</a>
+</div>
+        <div id="review_modal_190"></div>
+      </div>
+      <div class="p-2 bd-highlight">
+        <a class="btn btn-outline-primary btn-sm" data-purchase-button-url-value="/books/190/editions" data-controller="purchase-button" data-action="click->purchase-button#loadData" href="#">Purchase</a>
+      </div>
+    </div>
+</div>
+    </li>
+    <li class="list-group-item book-list-item p-0 pt-3" data-book="329">
+      <div class="row">
+  <div class="col">
+    <h4>
+        13. <a data-turbo-frame="_top" href="/books/329">Crime and Punishment</a>
+         by <a data-turbo-frame="_top" href="/authors/4789">Fyodor Dostoevsky</a>
+    </h4>
+    <div class="ps-3 ps-3">
+      <div class="float-start me-3 default-book-image">
+        <a aria_label="View details about 'Crime and Punishment' by Fyodor Dostoevsky" href="/books/329">
+          <img alt="Cover of 'Crime and Punishment' by Fyodor Dostoevsky" src="https://images.thegreatestbooks.org/oenemxzazqpab52eshes0whwao97">
+</a>      </div>
+      <div>
+        <p>
+          A young, impoverished former student in Saint Petersburg, Russia, formulates a plan to kill an unscrupulous pawnbroker to redistribute her wealth among the needy. However, after carrying out the act, he is consumed by guilt and paranoia, leading to a psychological battle within himself. As he grapples with his actions, he also navigates complex relationships with a variety of characters, including a virtuous prostitute, his sister, and a relentless detective. The narrative explores themes of morality, redemption, and the psychological impacts of crime.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row bd-highlight mb-2" id="user-book-actions-container-329">
+      <div class="p-2 bd-highlight">
+        <div class="dropdown">
+  <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="add-to-list-btn" data-bs-toggle="dropdown" aria-expanded="false">
+    Add to a List
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="add-to-list-btn">
+    <turbo-frame id="user-lists-index">
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I'm Reading" class="dropdown-item">Books I'm Reading</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I Want to Read" class="dropdown-item">Books I Want to Read</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I've Read" class="dropdown-item">Books I've Read</a></li>
+    </turbo-frame>    
+  </ul>
+</div>
+
+      </div>
+      <div class="p-2 bd-highlight">
+        <div id="review_329">
+    <a data-bs-toggle="modal" data-bs-target="#authModal" class="btn btn-outline-primary btn-sm" href="#">Review</a>
+</div>
+        <div id="review_modal_329"></div>
+      </div>
+      <div class="p-2 bd-highlight">
+        <a class="btn btn-outline-primary btn-sm" data-purchase-button-url-value="/books/329/editions" data-controller="purchase-button" data-action="click->purchase-button#loadData" href="#">Purchase</a>
+      </div>
+    </div>
+</div>
+    </li>
+    <li class="list-group-item book-list-item p-0 pt-3" data-book="213">
+      <div class="row">
+  <div class="col">
+    <h4>
+        14. <a data-turbo-frame="_top" href="/books/213">Anna Karenina</a>
+         by <a data-turbo-frame="_top" href="/authors/4740">Leo Tolstoy</a>
+    </h4>
+    <div class="ps-3 ps-3">
+      <div class="float-start me-3 default-book-image">
+        <a aria_label="View details about 'Anna Karenina' by Leo Tolstoy" href="/books/213">
+          <img alt="Cover of 'Anna Karenina' by Leo Tolstoy" src="https://images.thegreatestbooks.org/1hvvcff6my4o809xmacjpe7fxy6h">
+</a>      </div>
+      <div>
+        <p>
+          Set in 19th-century Russia, this novel revolves around the life of Anna Karenina, a high-society woman who, dissatisfied with her loveless marriage, embarks on a passionate affair with a charming officer named Count Vronsky. This scandalous affair leads to her social downfall, while parallel to this, the novel also explores the rural life and struggles of Levin, a landowner who seeks the meaning of life and true happiness. The book explores themes such as love, marriage, fidelity, societal norms, and the human quest for happiness.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row bd-highlight mb-2" id="user-book-actions-container-213">
+      <div class="p-2 bd-highlight">
+        <div class="dropdown">
+  <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="add-to-list-btn" data-bs-toggle="dropdown" aria-expanded="false">
+    Add to a List
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="add-to-list-btn">
+    <turbo-frame id="user-lists-index">
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I'm Reading" class="dropdown-item">Books I'm Reading</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I Want to Read" class="dropdown-item">Books I Want to Read</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I've Read" class="dropdown-item">Books I've Read</a></li>
+    </turbo-frame>    
+  </ul>
+</div>
+
+      </div>
+      <div class="p-2 bd-highlight">
+        <div id="review_213">
+    <a data-bs-toggle="modal" data-bs-target="#authModal" class="btn btn-outline-primary btn-sm" href="#">Review</a>
+</div>
+        <div id="review_modal_213"></div>
+      </div>
+      <div class="p-2 bd-highlight">
+        <a class="btn btn-outline-primary btn-sm" data-purchase-button-url-value="/books/213/editions" data-controller="purchase-button" data-action="click->purchase-button#loadData" href="#">Purchase</a>
+      </div>
+    </div>
+</div>
+    </li>
+    <li class="list-group-item book-list-item p-0 pt-3" data-book="116">
+        <div class="in-feed-ad-slot" style="padding-bottom: 1.5rem;"><ins class="adsbygoogle" style="display: block; height: 195px;" data-ad-client="ca-pub-2193700692946691" data-ad-slot="2895606476" data-ad-format="fluid" data-ad-layout-key="-f1+12-48-f0+16z" data-adsbygoogle-status="done"><div id="aswift_5_host" style="border: medium; height: 195px; width: 732px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block;"></div></ins></div>
+      <div class="row">
+  <div class="col">
+    <h4>
+        15. <a data-turbo-frame="_top" href="/books/116">War and Peace</a>
+         by <a data-turbo-frame="_top" href="/authors/4740">Leo Tolstoy</a>
+    </h4>
+    <div class="ps-3 ps-3">
+      <div class="float-start me-3 default-book-image">
+        <a aria_label="View details about 'War and Peace' by Leo Tolstoy" href="/books/116">
+          <img alt="Cover of 'War and Peace' by Leo Tolstoy" src="https://images.thegreatestbooks.org/l0d079mbda8c8ivtito38pljjfk2">
+</a>      </div>
+      <div>
+        <p>
+          Set in the backdrop of the Napoleonic era, the novel presents a panorama of Russian society and its descent into the chaos of war. It follows the interconnected lives of five aristocratic families, their struggles, romances, and personal journeys through the tumultuous period of history. The narrative explores themes of love, war, and the meaning of life, as it weaves together historical events with the personal stories of its characters.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row bd-highlight mb-2" id="user-book-actions-container-116">
+      <div class="p-2 bd-highlight">
+        <div class="dropdown">
+  <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="add-to-list-btn" data-bs-toggle="dropdown" aria-expanded="false">
+    Add to a List
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="add-to-list-btn">
+    <turbo-frame id="user-lists-index">
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I'm Reading" class="dropdown-item">Books I'm Reading</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I Want to Read" class="dropdown-item">Books I Want to Read</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I've Read" class="dropdown-item">Books I've Read</a></li>
+    </turbo-frame>    
+  </ul>
+</div>
+
+      </div>
+      <div class="p-2 bd-highlight">
+        <div id="review_116">
+    <a data-bs-toggle="modal" data-bs-target="#authModal" class="btn btn-outline-primary btn-sm" href="#">Review</a>
+</div>
+        <div id="review_modal_116"></div>
+      </div>
+      <div class="p-2 bd-highlight">
+        <a class="btn btn-outline-primary btn-sm" data-purchase-button-url-value="/books/116/editions" data-controller="purchase-button" data-action="click->purchase-button#loadData" href="#">Purchase</a>
+      </div>
+    </div>
+</div>
+    </li>
+    <li class="list-group-item book-list-item p-0 pt-3" data-book="36">
+      <div class="row">
+  <div class="col">
+    <h4>
+        16. <a data-turbo-frame="_top" href="/books/36">The Grapes of Wrath</a>
+         by <a data-turbo-frame="_top" href="/authors/4671">John Steinbeck</a>
+    </h4>
+    <div class="ps-3 ps-3">
+      <div class="float-start me-3 default-book-image">
+        <a aria_label="View details about 'The Grapes of Wrath' by John Steinbeck" href="/books/36">
+          <img alt="Cover of 'The Grapes of Wrath' by John Steinbeck" src="https://images.thegreatestbooks.org/xpwzkt4ibxaazpa5knn0al4zmy49">
+</a>      </div>
+      <div>
+        <p>
+          The book follows the Joad family, Oklahoma farmers displaced from their land during the Great Depression. The family, alongside thousands of other "Okies," travel to California in search of work and a better life. Throughout their journey, they face numerous hardships and injustices, yet maintain their humanity through unity and shared sacrifice. The narrative explores themes of man's inhumanity to man, the dignity of wrath, and the power of family and friendship, offering a stark and moving portrayal of the harsh realities of American migrant laborers during the 1930s.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row bd-highlight mb-2" id="user-book-actions-container-36">
+      <div class="p-2 bd-highlight">
+        <div class="dropdown">
+  <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="add-to-list-btn" data-bs-toggle="dropdown" aria-expanded="false">
+    Add to a List
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="add-to-list-btn">
+    <turbo-frame id="user-lists-index">
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I'm Reading" class="dropdown-item">Books I'm Reading</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I Want to Read" class="dropdown-item">Books I Want to Read</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I've Read" class="dropdown-item">Books I've Read</a></li>
+    </turbo-frame>    
+  </ul>
+</div>
+
+      </div>
+      <div class="p-2 bd-highlight">
+        <div id="review_36">
+    <a data-bs-toggle="modal" data-bs-target="#authModal" class="btn btn-outline-primary btn-sm" href="#">Review</a>
+</div>
+        <div id="review_modal_36"></div>
+      </div>
+      <div class="p-2 bd-highlight">
+        <a class="btn btn-outline-primary btn-sm" data-purchase-button-url-value="/books/36/editions" data-controller="purchase-button" data-action="click->purchase-button#loadData" href="#">Purchase</a>
+      </div>
+    </div>
+</div>
+    </li>
+    <li class="list-group-item book-list-item p-0 pt-3" data-book="52">
+      <div class="row">
+  <div class="col">
+    <h4>
+        17. <a data-turbo-frame="_top" href="/books/52">The Lord of the Rings</a>
+         by <a data-turbo-frame="_top" href="/authors/4684">J. R. R. Tolkien</a>
+    </h4>
+    <div class="ps-3 ps-3">
+      <div class="float-start me-3 default-book-image">
+        <a aria_label="View details about 'The Lord of the Rings' by J. R. R. Tolkien" href="/books/52">
+          <img alt="Cover of 'The Lord of the Rings' by J. R. R. Tolkien" src="https://images.thegreatestbooks.org/n5g1vux3diknhul670f02i9xvczy">
+</a>      </div>
+      <div>
+        <p>
+          This epic high-fantasy novel centers around a modest hobbit who is entrusted with the task of destroying a powerful ring that could enable the dark lord to conquer the world. Accompanied by a diverse group of companions, the hobbit embarks on a perilous journey across Middle-earth, battling evil forces and facing numerous challenges. The narrative, rich in mythology and complex themes of good versus evil, friendship, and heroism, has had a profound influence on the fantasy genre.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row bd-highlight mb-2" id="user-book-actions-container-52">
+      <div class="p-2 bd-highlight">
+        <div class="dropdown">
+  <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="add-to-list-btn" data-bs-toggle="dropdown" aria-expanded="false">
+    Add to a List
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="add-to-list-btn">
+    <turbo-frame id="user-lists-index">
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I'm Reading" class="dropdown-item">Books I'm Reading</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I Want to Read" class="dropdown-item">Books I Want to Read</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I've Read" class="dropdown-item">Books I've Read</a></li>
+    </turbo-frame>    
+  </ul>
+</div>
+
+      </div>
+      <div class="p-2 bd-highlight">
+        <div id="review_52">
+    <a data-bs-toggle="modal" data-bs-target="#authModal" class="btn btn-outline-primary btn-sm" href="#">Review</a>
+</div>
+        <div id="review_modal_52"></div>
+      </div>
+      <div class="p-2 bd-highlight">
+        <a class="btn btn-outline-primary btn-sm" data-purchase-button-url-value="/books/52/editions" data-controller="purchase-button" data-action="click->purchase-button#loadData" href="#">Purchase</a>
+      </div>
+    </div>
+</div>
+    </li>
+    <li class="list-group-item book-list-item p-0 pt-3" data-book="18">
+      <div class="row">
+  <div class="col">
+    <h4>
+        18. <a data-turbo-frame="_top" href="/books/18">Catch-22</a>
+         by <a data-turbo-frame="_top" href="/authors/4653">Joseph Heller</a>
+    </h4>
+    <div class="ps-3 ps-3">
+      <div class="float-start me-3 default-book-image">
+        <a aria_label="View details about 'Catch-22' by Joseph Heller" href="/books/18">
+          <img alt="Cover of 'Catch-22' by Joseph Heller" src="https://images.thegreatestbooks.org/xi6dofxq8k1wcpifby71qqmwpann">
+</a>      </div>
+      <div>
+        <p>
+          The book is a satirical critique of military bureaucracy and the illogical nature of war, set during World War II. The story follows a U.S. Army Air Forces B-25 bombardier stationed in Italy, who is trying to maintain his sanity while fulfilling his service requirements so that he can go home. The novel explores the absurdity of war and military life through the experiences of the protagonist, who discovers that a bureaucratic rule, the "Catch-22", makes it impossible for him to escape his dangerous situation. The more he tries to avoid his military assignments, the deeper he gets sucked into the irrational world of military rule.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row bd-highlight mb-2" id="user-book-actions-container-18">
+      <div class="p-2 bd-highlight">
+        <div class="dropdown">
+  <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="add-to-list-btn" data-bs-toggle="dropdown" aria-expanded="false">
+    Add to a List
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="add-to-list-btn">
+    <turbo-frame id="user-lists-index">
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I'm Reading" class="dropdown-item">Books I'm Reading</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I Want to Read" class="dropdown-item">Books I Want to Read</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I've Read" class="dropdown-item">Books I've Read</a></li>
+    </turbo-frame>    
+  </ul>
+</div>
+
+      </div>
+      <div class="p-2 bd-highlight">
+        <div id="review_18">
+    <a data-bs-toggle="modal" data-bs-target="#authModal" class="btn btn-outline-primary btn-sm" href="#">Review</a>
+</div>
+        <div id="review_modal_18"></div>
+      </div>
+      <div class="p-2 bd-highlight">
+        <a class="btn btn-outline-primary btn-sm" data-purchase-button-url-value="/books/18/editions" data-controller="purchase-button" data-action="click->purchase-button#loadData" href="#">Purchase</a>
+      </div>
+    </div>
+</div>
+    </li>
+    <li class="list-group-item book-list-item p-0 pt-3" data-book="209">
+      <div class="row">
+  <div class="col">
+    <h4>
+        19. <a data-turbo-frame="_top" href="/books/209">Madame Bovary</a>
+         by <a data-turbo-frame="_top" href="/authors/4784">Gustave Flaubert</a>
+    </h4>
+    <div class="ps-3 ps-3">
+      <div class="float-start me-3 default-book-image">
+        <a aria_label="View details about 'Madame Bovary' by Gustave Flaubert" href="/books/209">
+          <img alt="Cover of 'Madame Bovary' by Gustave Flaubert" src="https://images.thegreatestbooks.org/v57bi630dc2ygjugf7nuk4pmbv33">
+</a>      </div>
+      <div>
+        <p>
+          Madame Bovary is a tragic novel about a young woman, Emma Bovary, who is married to a dull, but kind-hearted doctor. Dissatisfied with her life, she embarks on a series of extramarital affairs and indulges in a luxurious lifestyle in an attempt to escape the banalities and emptiness of provincial life. Her desire for passion and excitement leads her down a path of financial ruin and despair, ultimately resulting in a tragic end.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row bd-highlight mb-2" id="user-book-actions-container-209">
+      <div class="p-2 bd-highlight">
+        <div class="dropdown">
+  <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="add-to-list-btn" data-bs-toggle="dropdown" aria-expanded="false">
+    Add to a List
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="add-to-list-btn">
+    <turbo-frame id="user-lists-index">
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I'm Reading" class="dropdown-item">Books I'm Reading</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I Want to Read" class="dropdown-item">Books I Want to Read</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I've Read" class="dropdown-item">Books I've Read</a></li>
+    </turbo-frame>    
+  </ul>
+</div>
+
+      </div>
+      <div class="p-2 bd-highlight">
+        <div id="review_209">
+    <a data-bs-toggle="modal" data-bs-target="#authModal" class="btn btn-outline-primary btn-sm" href="#">Review</a>
+</div>
+        <div id="review_modal_209"></div>
+      </div>
+      <div class="p-2 bd-highlight">
+        <a class="btn btn-outline-primary btn-sm" data-purchase-button-url-value="/books/209/editions" data-controller="purchase-button" data-action="click->purchase-button#loadData" href="#">Purchase</a>
+      </div>
+    </div>
+</div>
+    </li>
+    <li class="list-group-item book-list-item p-0 pt-3" data-book="85">
+        <div class="in-feed-ad-slot" style="padding-bottom: 1.5rem;"><ins class="adsbygoogle" style="display: block; height: 195px;" data-ad-client="ca-pub-2193700692946691" data-ad-slot="2895606476" data-ad-format="fluid" data-ad-layout-key="-f1+12-48-f0+16z" data-adsbygoogle-status="done"><div id="aswift_6_host" style="border: medium; height: 195px; width: 732px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block;"></div></ins></div>
+      <div class="row">
+  <div class="col">
+    <h4>
+        20. <a data-turbo-frame="_top" href="/books/85">The Sound and the Fury</a>
+         by <a data-turbo-frame="_top" href="/authors/4680">William Faulkner</a>
+    </h4>
+    <div class="ps-3 ps-3">
+      <div class="float-start me-3 default-book-image">
+        <a aria_label="View details about 'The Sound and the Fury' by William Faulkner" href="/books/85">
+          <img alt="Cover of 'The Sound and the Fury' by William Faulkner" src="https://images.thegreatestbooks.org/nha3w67wwiogr58iwpoph4qti6ud">
+</a>      </div>
+      <div>
+        <p>
+          The novel is a complex exploration of the tragic Compson family from the American South. Told from four distinct perspectives, the story unfolds through stream of consciousness narratives, each revealing their own understanding of the family's decline. The characters grapple with post-Civil War societal changes, personal loss, and their own mental instability. The narrative is marked by themes of time, innocence, and the burdens of the past.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row bd-highlight mb-2" id="user-book-actions-container-85">
+      <div class="p-2 bd-highlight">
+        <div class="dropdown">
+  <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="add-to-list-btn" data-bs-toggle="dropdown" aria-expanded="false">
+    Add to a List
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="add-to-list-btn">
+    <turbo-frame id="user-lists-index">
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I'm Reading" class="dropdown-item">Books I'm Reading</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I Want to Read" class="dropdown-item">Books I Want to Read</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I've Read" class="dropdown-item">Books I've Read</a></li>
+    </turbo-frame>    
+  </ul>
+</div>
+
+      </div>
+      <div class="p-2 bd-highlight">
+        <div id="review_85">
+    <a data-bs-toggle="modal" data-bs-target="#authModal" class="btn btn-outline-primary btn-sm" href="#">Review</a>
+</div>
+        <div id="review_modal_85"></div>
+      </div>
+      <div class="p-2 bd-highlight">
+        <a class="btn btn-outline-primary btn-sm" data-purchase-button-url-value="/books/85/editions" data-controller="purchase-button" data-action="click->purchase-button#loadData" href="#">Purchase</a>
+      </div>
+    </div>
+</div>
+    </li>
+    <li class="list-group-item book-list-item p-0 pt-3" data-book="211">
+      <div class="row">
+  <div class="col">
+    <h4>
+        21. <a data-turbo-frame="_top" href="/books/211">Alice's Adventures in Wonderland</a>
+         by <a data-turbo-frame="_top" href="/authors/4786">Lewis Carroll</a>
+    </h4>
+    <div class="ps-3 ps-3">
+      <div class="float-start me-3 default-book-image">
+        <a aria_label="View details about 'Alice's Adventures in Wonderland' by Lewis Carroll" href="/books/211">
+          <img alt="Cover of 'Alice's Adventures in Wonderland' by Lewis Carroll" src="https://images.thegreatestbooks.org/ghd98em6a7n2ydnmmzwpyww6o54o">
+</a>      </div>
+      <div>
+        <p>
+          This novel follows the story of a young girl named Alice who falls down a rabbit hole into a fantastical world full of peculiar creatures and bizarre experiences. As she navigates through this strange land, she encounters a series of nonsensical events, including a tea party with a Mad Hatter, a pool of tears, and a trial over stolen tarts. The book is renowned for its playful use of language, logic, and its exploration of the boundaries of reality.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row bd-highlight mb-2" id="user-book-actions-container-211">
+      <div class="p-2 bd-highlight">
+        <div class="dropdown">
+  <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="add-to-list-btn" data-bs-toggle="dropdown" aria-expanded="false">
+    Add to a List
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="add-to-list-btn">
+    <turbo-frame id="user-lists-index">
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I'm Reading" class="dropdown-item">Books I'm Reading</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I Want to Read" class="dropdown-item">Books I Want to Read</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I've Read" class="dropdown-item">Books I've Read</a></li>
+    </turbo-frame>    
+  </ul>
+</div>
+
+      </div>
+      <div class="p-2 bd-highlight">
+        <div id="review_211">
+    <a data-bs-toggle="modal" data-bs-target="#authModal" class="btn btn-outline-primary btn-sm" href="#">Review</a>
+</div>
+        <div id="review_modal_211"></div>
+      </div>
+      <div class="p-2 bd-highlight">
+        <a class="btn btn-outline-primary btn-sm" data-purchase-button-url-value="/books/211/editions" data-controller="purchase-button" data-action="click->purchase-button#loadData" href="#">Purchase</a>
+      </div>
+    </div>
+</div>
+    </li>
+    <li class="list-group-item book-list-item p-0 pt-3" data-book="217">
+      <div class="row">
+  <div class="col">
+    <h4>
+        22. <a data-turbo-frame="_top" href="/books/217">The Adventures of Huckleberry Finn</a>
+         by <a data-turbo-frame="_top" href="/authors/4790">Mark Twain</a>
+    </h4>
+    <div class="ps-3 ps-3">
+      <div class="float-start me-3 default-book-image">
+        <a aria_label="View details about 'The Adventures of Huckleberry Finn' by Mark Twain" href="/books/217">
+          <img alt="Cover of 'The Adventures of Huckleberry Finn' by Mark Twain" src="https://images.thegreatestbooks.org/r7ixblslyr5q5xtx0pzbc2ag2co2">
+</a>      </div>
+      <div>
+        <p>
+          The novel follows the journey of a young boy named Huckleberry Finn and a runaway slave named Jim as they travel down the Mississippi River on a raft. Set in the American South before the Civil War, the story explores themes of friendship, freedom, and the hypocrisy of society. Through various adventures and encounters with a host of colorful characters, Huck grapples with his personal values, often clashing with the societal norms of the time.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row bd-highlight mb-2" id="user-book-actions-container-217">
+      <div class="p-2 bd-highlight">
+        <div class="dropdown">
+  <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="add-to-list-btn" data-bs-toggle="dropdown" aria-expanded="false">
+    Add to a List
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="add-to-list-btn">
+    <turbo-frame id="user-lists-index">
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I'm Reading" class="dropdown-item">Books I'm Reading</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I Want to Read" class="dropdown-item">Books I Want to Read</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I've Read" class="dropdown-item">Books I've Read</a></li>
+    </turbo-frame>    
+  </ul>
+</div>
+
+      </div>
+      <div class="p-2 bd-highlight">
+        <div id="review_217">
+    <a data-bs-toggle="modal" data-bs-target="#authModal" class="btn btn-outline-primary btn-sm" href="#">Review</a>
+</div>
+        <div id="review_modal_217"></div>
+      </div>
+      <div class="p-2 bd-highlight">
+        <a class="btn btn-outline-primary btn-sm" data-purchase-button-url-value="/books/217/editions" data-controller="purchase-button" data-action="click->purchase-button#loadData" href="#">Purchase</a>
+      </div>
+    </div>
+</div>
+    </li>
+    <li class="list-group-item book-list-item p-0 pt-3" data-book="107">
+      <div class="row">
+  <div class="col">
+    <h4>
+        23. <a data-turbo-frame="_top" href="/books/107">Jane Eyre</a>
+         by <a data-turbo-frame="_top" href="/authors/6798">Charlotte Bronte</a>
+    </h4>
+    <div class="ps-3 ps-3">
+      <div class="float-start me-3 default-book-image">
+        <a aria_label="View details about 'Jane Eyre' by Charlotte Bronte" href="/books/107">
+          <img alt="Cover of 'Jane Eyre' by Charlotte Bronte" src="https://images.thegreatestbooks.org/shp4qklhcnw0jt493f0431ht1mu3">
+</a>      </div>
+      <div>
+        <p>
+          The novel follows the life of Jane Eyre, an orphan who is mistreated by her relatives and sent to a charity school. As she grows up, Jane becomes a governess at Thornfield Hall, where she falls in love with the brooding and mysterious Mr. Rochester. However, she soon learns of a dark secret in his past that threatens their future together. The story is a profound exploration of a woman's self-discovery and her struggle for independence and love in a rigid Victorian society.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row bd-highlight mb-2" id="user-book-actions-container-107">
+      <div class="p-2 bd-highlight">
+        <div class="dropdown">
+  <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="add-to-list-btn" data-bs-toggle="dropdown" aria-expanded="false">
+    Add to a List
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="add-to-list-btn">
+    <turbo-frame id="user-lists-index">
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I'm Reading" class="dropdown-item">Books I'm Reading</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I Want to Read" class="dropdown-item">Books I Want to Read</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I've Read" class="dropdown-item">Books I've Read</a></li>
+    </turbo-frame>    
+  </ul>
+</div>
+
+      </div>
+      <div class="p-2 bd-highlight">
+        <div id="review_107">
+    <a data-bs-toggle="modal" data-bs-target="#authModal" class="btn btn-outline-primary btn-sm" href="#">Review</a>
+</div>
+        <div id="review_modal_107"></div>
+      </div>
+      <div class="p-2 bd-highlight">
+        <a class="btn btn-outline-primary btn-sm" data-purchase-button-url-value="/books/107/editions" data-controller="purchase-button" data-action="click->purchase-button#loadData" href="#">Purchase</a>
+      </div>
+    </div>
+</div>
+    </li>
+    <li class="list-group-item book-list-item p-0 pt-3" data-book="410">
+      <div class="row">
+  <div class="col">
+    <h4>
+        24. <a data-turbo-frame="_top" href="/books/410">Middlemarch</a>
+         by <a data-turbo-frame="_top" href="/authors/4788">George Eliot</a>
+    </h4>
+    <div class="ps-3 ps-3">
+      <div class="float-start me-3 default-book-image">
+        <a aria_label="View details about 'Middlemarch' by George Eliot" href="/books/410">
+          <img alt="Cover of 'Middlemarch' by George Eliot" src="https://images.thegreatestbooks.org/yawdy88jp7ivm8nnjfehjnurluzp">
+</a>      </div>
+      <div>
+        <p>
+          Set in the fictitious English town of Middlemarch during the early 19th century, the novel explores the complex web of relationships in a close-knit society. It follows the lives of several characters, primarily Dorothea Brooke, a young woman of idealistic fervor, and Tertius Lydgate, an ambitious young doctor, who both grapple with societal expectations, personal desires, and moral dilemmas. Their stories intertwine with a rich tapestry of other townsfolk, reflecting themes of love, marriage, ambition, and reform, making a profound commentary on the human condition.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row bd-highlight mb-2" id="user-book-actions-container-410">
+      <div class="p-2 bd-highlight">
+        <div class="dropdown">
+  <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="add-to-list-btn" data-bs-toggle="dropdown" aria-expanded="false">
+    Add to a List
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="add-to-list-btn">
+    <turbo-frame id="user-lists-index">
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I'm Reading" class="dropdown-item">Books I'm Reading</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I Want to Read" class="dropdown-item">Books I Want to Read</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I've Read" class="dropdown-item">Books I've Read</a></li>
+    </turbo-frame>    
+  </ul>
+</div>
+
+      </div>
+      <div class="p-2 bd-highlight">
+        <div id="review_410">
+    <a data-bs-toggle="modal" data-bs-target="#authModal" class="btn btn-outline-primary btn-sm" href="#">Review</a>
+</div>
+        <div id="review_modal_410"></div>
+      </div>
+      <div class="p-2 bd-highlight">
+        <a class="btn btn-outline-primary btn-sm" data-purchase-button-url-value="/books/410/editions" data-controller="purchase-button" data-action="click->purchase-button#loadData" href="#">Purchase</a>
+      </div>
+    </div>
+</div>
+    </li>
+    <li class="list-group-item book-list-item p-0 pt-3" data-book="135">
+        <div class="in-feed-ad-slot" style="padding-bottom: 1.5rem;"><ins class="adsbygoogle" style="display: block; height: 195px;" data-ad-client="ca-pub-2193700692946691" data-ad-slot="2895606476" data-ad-format="fluid" data-ad-layout-key="-f1+12-48-f0+16z" data-adsbygoogle-status="done"><div id="aswift_7_host" style="border: medium; height: 195px; width: 732px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block;"></div></ins></div>
+      <div class="row">
+  <div class="col">
+    <h4>
+        25. <a data-turbo-frame="_top" href="/books/135">Heart of Darkness</a>
+         by <a data-turbo-frame="_top" href="/authors/4746">Joseph Conrad</a>
+    </h4>
+    <div class="ps-3 ps-3">
+      <div class="float-start me-3 default-book-image">
+        <a aria_label="View details about 'Heart of Darkness' by Joseph Conrad" href="/books/135">
+          <img alt="Cover of 'Heart of Darkness' by Joseph Conrad" src="https://images.thegreatestbooks.org/ulqqs94h209mkicqooc10arrh5o2">
+</a>      </div>
+      <div>
+        <p>
+          This classic novel follows the journey of a seaman who travels up the Congo River into the African interior to meet a mysterious ivory trader. Throughout his journey, he encounters the harsh realities of imperialism, the brutal treatment of native Africans, and the depths of human cruelty and madness. The protagonist's journey into the 'heart of darkness' serves as both a physical exploration of the African continent and a metaphorical exploration into the depths of human nature.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row bd-highlight mb-2" id="user-book-actions-container-135">
+      <div class="p-2 bd-highlight">
+        <div class="dropdown">
+  <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" id="add-to-list-btn" data-bs-toggle="dropdown" aria-expanded="false">
+    Add to a List
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="add-to-list-btn">
+    <turbo-frame id="user-lists-index">
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I'm Reading" class="dropdown-item">Books I'm Reading</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I Want to Read" class="dropdown-item">Books I Want to Read</a></li>
+          <li><a data-turbo-method="post" href="#" data-bs-toggle="modal" data-bs-target="#authModal" data-title="Books I've Read" class="dropdown-item">Books I've Read</a></li>
+    </turbo-frame>    
+  </ul>
+</div>
+
+      </div>
+      <div class="p-2 bd-highlight">
+        <div id="review_135">
+    <a data-bs-toggle="modal" data-bs-target="#authModal" class="btn btn-outline-primary btn-sm" href="#">Review</a>
+</div>
+        <div id="review_modal_135"></div>
+      </div>
+      <div class="p-2 bd-highlight">
+        <a class="btn btn-outline-primary btn-sm" data-purchase-button-url-value="/books/135/editions" data-controller="purchase-button" data-action="click->purchase-button#loadData" href="#">Purchase</a>
+      </div>
+    </div>
+</div>
+    </li>
+</ol>
+
+
+        <turbo-frame loading="lazy" autoscroll="true" data-autoscroll-block="top" id="books_list" src="/page/2.turbo_stream">
+          <div class="alert alert-primary d-flex align-items-center justify-content-center" role="alert" style="height: 50px; background-color: rgba(0, 123, 255, 0.5);">
+            <div class="spinner-border text-light" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <strong class="ms-3">Loading more books...</strong>
+          </div>
+</turbo-frame>    </div>
+    <div class="d-block d-md-none">
+      <div class="d-flex bg-secondary pt-2 align-items-center border rounded text-white mt-4 mb-2">
+        <h3 class="fs-6 ms-2">Reading Statistics</h3>
+      </div>
+      <p class="small-text">
+        Click the button below to see how many of these books you've read!
+      </p>
+      <div class="user_reading_stats">
+  <form data-turbo-frame="user_reading_stats" action="/user_reading_stats" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="9YSyTmbX2G2iLQVIJq4z52ghXtP1TvYCqZMKNGFTJskJCfO8GbmyMULwHNNR32-VXNbHO1b0CqBhr6noxo7Iyg" autocomplete="off">
+    
+
+
+
+
+
+    <button name="button" type="submit" class="btn btn-outline-primary btn-sm d-block w-100 text-center">
+      Show Reading Stats
+</button></form></div>
+    </div>
+    <div class="d-block d-md-none">
+      <div class="d-flex bg-secondary pt-2 align-items-center border rounded text-white mt-4 mb-2">
+  <h3 class="fs-6 ms-2">Download</h3>
+</div>
+<p class="small-text">
+  If you're interested in downloading this list as a CSV file for use in a spreadsheet application, you can easily do so by clicking the button below. Please note that to ensure a manageable file size and faster download, the CSV will include details for only the first 500 books.
+</p>
+<a href="https://thegreatestbooks.org/the-greatest-books.html.csv" rel="nofollow" class="btn btn-outline-primary btn-sm">
+  <i class="bi bi-file-arrow-down-fill"></i> Download
+</a>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="create-custom-user-list-modal" tabindex="-1" aria-labelledby="create-custom-user-list-modal-label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="create-custom-user-list-form" data-turbo-frame="user-lists-index" data-controller="create-user-list-form" action="/user_lists" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="wlX1UzIGWHcJrSxbWw5mkU5oNxWaQdgsN9YnSZUXSXES_KqkhJt6L8UBrowc7fLlX-WVJMj6vJr_7xbYBQZhOA" autocomplete="off">
+        <div class="modal-header">
+          <h5 class="modal-title" id="create-custom-user-list-modal-label">Create Custom User List</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3"><label class="form-label required" for="user_list_name">Name</label><input required="required" class="form-control" type="text" name="user_list[name]" id="user_list_name"></div>
+          <input data-create-user-list-form-target="bookIdsInput" autocomplete="off" type="hidden" value="" name="user_list[book_ids]" id="user_list_book_ids">
+          <input data-create-user-list-form-target="bookIdInput" autocomplete="off" type="hidden" name="user_list[book_id]" id="user_list_book_id">
+          <div class="mb-3"><label class="form-label" for="user_list_description">Description</label><textarea class="form-control" name="user_list[description]" id="user_list_description"></textarea></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" disabled="" id="create-custom-user-list-form-create-btn" data-create-user-list-form-target="submitFormBtn" data-action="click->create-user-list-form#submit">Create</button>
+        </div>
+</form>    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="date-filter-modal" tabindex="-1" aria-labelledby="date-filter-modal-label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="date-filter-modal-label">Filter by Date Range</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="date-filter-form-modal" action="/" accept-charset="UTF-8" method="get">
+          <div class="mb-3"><label class="form-label" for="date_start">Start Date</label><select id="date-start-modal" class="form-select date-start-input" name="date_start"><option value="">Any</option>
+<option value="2020">2020</option>
+<option value="2015">2015</option>
+<option value="2010">2010</option>
+<option value="2005">2005</option>
+<option value="2000">2000</option>
+<option value="1995">1995</option>
+<option value="1990">1990</option>
+<option value="1985">1985</option>
+<option value="1980">1980</option>
+<option value="1975">1975</option>
+<option value="1970">1970</option>
+<option value="1965">1965</option>
+<option value="1960">1960</option>
+<option value="1955">1955</option>
+<option value="1950">1950</option>
+<option value="1945">1945</option>
+<option value="1940">1940</option>
+<option value="1935">1935</option>
+<option value="1930">1930</option>
+<option value="1925">1925</option>
+<option value="1920">1920</option>
+<option value="1915">1915</option>
+<option value="1910">1910</option>
+<option value="1905">1905</option>
+<option value="1900">1900</option>
+<option value="1895">1895</option>
+<option value="1890">1890</option>
+<option value="1885">1885</option>
+<option value="1880">1880</option>
+<option value="1875">1875</option>
+<option value="1870">1870</option>
+<option value="1865">1865</option>
+<option value="1860">1860</option>
+<option value="1855">1855</option>
+<option value="1850">1850</option>
+<option value="1845">1845</option>
+<option value="1840">1840</option>
+<option value="1835">1835</option>
+<option value="1830">1830</option>
+<option value="1825">1825</option>
+<option value="1820">1820</option>
+<option value="1815">1815</option>
+<option value="1810">1810</option>
+<option value="1805">1805</option>
+<option value="1800">1800</option>
+<option value="1795">1795</option>
+<option value="1790">1790</option>
+<option value="1785">1785</option>
+<option value="1780">1780</option>
+<option value="1775">1775</option>
+<option value="1770">1770</option>
+<option value="1765">1765</option>
+<option value="1760">1760</option>
+<option value="1755">1755</option>
+<option value="1750">1750</option>
+<option value="1745">1745</option>
+<option value="1740">1740</option>
+<option value="1735">1735</option>
+<option value="1730">1730</option>
+<option value="1725">1725</option>
+<option value="1720">1720</option>
+<option value="1715">1715</option>
+<option value="1710">1710</option>
+<option value="1705">1705</option>
+<option value="1700">1700</option>
+<option value="1695">1695</option>
+<option value="1690">1690</option>
+<option value="1685">1685</option>
+<option value="1680">1680</option>
+<option value="1675">1675</option>
+<option value="1670">1670</option>
+<option value="1665">1665</option>
+<option value="1660">1660</option>
+<option value="1655">1655</option>
+<option value="1650">1650</option>
+<option value="1645">1645</option>
+<option value="1640">1640</option>
+<option value="1635">1635</option>
+<option value="1630">1630</option>
+<option value="1625">1625</option>
+<option value="1620">1620</option>
+<option value="1615">1615</option>
+<option value="1610">1610</option>
+<option value="1605">1605</option>
+<option value="1600">1600</option>
+<option value="1595">1595</option>
+<option value="1590">1590</option>
+<option value="1585">1585</option>
+<option value="1580">1580</option>
+<option value="1575">1575</option>
+<option value="1570">1570</option>
+<option value="1565">1565</option>
+<option value="1560">1560</option>
+<option value="1555">1555</option>
+<option value="1550">1550</option>
+<option value="1545">1545</option>
+<option value="1540">1540</option>
+<option value="1535">1535</option>
+<option value="1530">1530</option>
+<option value="1525">1525</option>
+<option value="1520">1520</option>
+<option value="1515">1515</option>
+<option value="1510">1510</option>
+<option value="1505">1505</option>
+<option value="1500">1500</option>
+<option value="1495">1495</option>
+<option value="1490">1490</option>
+<option value="1485">1485</option>
+<option value="1480">1480</option>
+<option value="1475">1475</option>
+<option value="1470">1470</option>
+<option value="1465">1465</option>
+<option value="1460">1460</option>
+<option value="1455">1455</option>
+<option value="1450">1450</option>
+<option value="1445">1445</option>
+<option value="1440">1440</option>
+<option value="1435">1435</option>
+<option value="1430">1430</option>
+<option value="1425">1425</option>
+<option value="1420">1420</option>
+<option value="1415">1415</option>
+<option value="1410">1410</option>
+<option value="1405">1405</option>
+<option value="1400">1400</option>
+<option value="1395">1395</option>
+<option value="1390">1390</option>
+<option value="1385">1385</option>
+<option value="1380">1380</option>
+<option value="1375">1375</option>
+<option value="1370">1370</option>
+<option value="1365">1365</option>
+<option value="1360">1360</option>
+<option value="1355">1355</option>
+<option value="1350">1350</option>
+<option value="1345">1345</option>
+<option value="1340">1340</option>
+<option value="1335">1335</option>
+<option value="1330">1330</option>
+<option value="1325">1325</option>
+<option value="1320">1320</option>
+<option value="1315">1315</option>
+<option value="1310">1310</option>
+<option value="1305">1305</option>
+<option value="1300">1300</option>
+<option value="1295">1295</option>
+<option value="1290">1290</option>
+<option value="1285">1285</option>
+<option value="1280">1280</option>
+<option value="1275">1275</option>
+<option value="1270">1270</option>
+<option value="1265">1265</option>
+<option value="1260">1260</option>
+<option value="1255">1255</option>
+<option value="1250">1250</option>
+<option value="1245">1245</option>
+<option value="1240">1240</option>
+<option value="1235">1235</option>
+<option value="1230">1230</option>
+<option value="1225">1225</option>
+<option value="1220">1220</option>
+<option value="1215">1215</option>
+<option value="1210">1210</option>
+<option value="1205">1205</option>
+<option value="1200">1200</option>
+<option value="1195">1195</option>
+<option value="1190">1190</option>
+<option value="1185">1185</option>
+<option value="1180">1180</option>
+<option value="1175">1175</option>
+<option value="1170">1170</option>
+<option value="1165">1165</option>
+<option value="1160">1160</option>
+<option value="1155">1155</option>
+<option value="1150">1150</option>
+<option value="1145">1145</option>
+<option value="1140">1140</option>
+<option value="1135">1135</option>
+<option value="1130">1130</option>
+<option value="1125">1125</option>
+<option value="1120">1120</option>
+<option value="1115">1115</option>
+<option value="1110">1110</option>
+<option value="1105">1105</option>
+<option value="1100">1100</option>
+<option value="1095">1095</option>
+<option value="1090">1090</option>
+<option value="1085">1085</option>
+<option value="1080">1080</option>
+<option value="1075">1075</option>
+<option value="1070">1070</option>
+<option value="1065">1065</option>
+<option value="1060">1060</option>
+<option value="1055">1055</option>
+<option value="1050">1050</option>
+<option value="1045">1045</option>
+<option value="1040">1040</option>
+<option value="1035">1035</option>
+<option value="1030">1030</option>
+<option value="1025">1025</option>
+<option value="1020">1020</option>
+<option value="1015">1015</option>
+<option value="1010">1010</option>
+<option value="1005">1005</option>
+<option value="1000">1000</option></select></div>
+          <div class="mb-3"><label class="form-label" for="date_end">End Date</label><select id="date-end-modal" class="form-select date-end-input" name="date_end"><option value="">Any</option>
+<option value="2020">2020</option>
+<option value="2015">2015</option>
+<option value="2010">2010</option>
+<option value="2005">2005</option>
+<option value="2000">2000</option>
+<option value="1995">1995</option>
+<option value="1990">1990</option>
+<option value="1985">1985</option>
+<option value="1980">1980</option>
+<option value="1975">1975</option>
+<option value="1970">1970</option>
+<option value="1965">1965</option>
+<option value="1960">1960</option>
+<option value="1955">1955</option>
+<option value="1950">1950</option>
+<option value="1945">1945</option>
+<option value="1940">1940</option>
+<option value="1935">1935</option>
+<option value="1930">1930</option>
+<option value="1925">1925</option>
+<option value="1920">1920</option>
+<option value="1915">1915</option>
+<option value="1910">1910</option>
+<option value="1905">1905</option>
+<option value="1900">1900</option>
+<option value="1895">1895</option>
+<option value="1890">1890</option>
+<option value="1885">1885</option>
+<option value="1880">1880</option>
+<option value="1875">1875</option>
+<option value="1870">1870</option>
+<option value="1865">1865</option>
+<option value="1860">1860</option>
+<option value="1855">1855</option>
+<option value="1850">1850</option>
+<option value="1845">1845</option>
+<option value="1840">1840</option>
+<option value="1835">1835</option>
+<option value="1830">1830</option>
+<option value="1825">1825</option>
+<option value="1820">1820</option>
+<option value="1815">1815</option>
+<option value="1810">1810</option>
+<option value="1805">1805</option>
+<option value="1800">1800</option>
+<option value="1795">1795</option>
+<option value="1790">1790</option>
+<option value="1785">1785</option>
+<option value="1780">1780</option>
+<option value="1775">1775</option>
+<option value="1770">1770</option>
+<option value="1765">1765</option>
+<option value="1760">1760</option>
+<option value="1755">1755</option>
+<option value="1750">1750</option>
+<option value="1745">1745</option>
+<option value="1740">1740</option>
+<option value="1735">1735</option>
+<option value="1730">1730</option>
+<option value="1725">1725</option>
+<option value="1720">1720</option>
+<option value="1715">1715</option>
+<option value="1710">1710</option>
+<option value="1705">1705</option>
+<option value="1700">1700</option>
+<option value="1695">1695</option>
+<option value="1690">1690</option>
+<option value="1685">1685</option>
+<option value="1680">1680</option>
+<option value="1675">1675</option>
+<option value="1670">1670</option>
+<option value="1665">1665</option>
+<option value="1660">1660</option>
+<option value="1655">1655</option>
+<option value="1650">1650</option>
+<option value="1645">1645</option>
+<option value="1640">1640</option>
+<option value="1635">1635</option>
+<option value="1630">1630</option>
+<option value="1625">1625</option>
+<option value="1620">1620</option>
+<option value="1615">1615</option>
+<option value="1610">1610</option>
+<option value="1605">1605</option>
+<option value="1600">1600</option>
+<option value="1595">1595</option>
+<option value="1590">1590</option>
+<option value="1585">1585</option>
+<option value="1580">1580</option>
+<option value="1575">1575</option>
+<option value="1570">1570</option>
+<option value="1565">1565</option>
+<option value="1560">1560</option>
+<option value="1555">1555</option>
+<option value="1550">1550</option>
+<option value="1545">1545</option>
+<option value="1540">1540</option>
+<option value="1535">1535</option>
+<option value="1530">1530</option>
+<option value="1525">1525</option>
+<option value="1520">1520</option>
+<option value="1515">1515</option>
+<option value="1510">1510</option>
+<option value="1505">1505</option>
+<option value="1500">1500</option>
+<option value="1495">1495</option>
+<option value="1490">1490</option>
+<option value="1485">1485</option>
+<option value="1480">1480</option>
+<option value="1475">1475</option>
+<option value="1470">1470</option>
+<option value="1465">1465</option>
+<option value="1460">1460</option>
+<option value="1455">1455</option>
+<option value="1450">1450</option>
+<option value="1445">1445</option>
+<option value="1440">1440</option>
+<option value="1435">1435</option>
+<option value="1430">1430</option>
+<option value="1425">1425</option>
+<option value="1420">1420</option>
+<option value="1415">1415</option>
+<option value="1410">1410</option>
+<option value="1405">1405</option>
+<option value="1400">1400</option>
+<option value="1395">1395</option>
+<option value="1390">1390</option>
+<option value="1385">1385</option>
+<option value="1380">1380</option>
+<option value="1375">1375</option>
+<option value="1370">1370</option>
+<option value="1365">1365</option>
+<option value="1360">1360</option>
+<option value="1355">1355</option>
+<option value="1350">1350</option>
+<option value="1345">1345</option>
+<option value="1340">1340</option>
+<option value="1335">1335</option>
+<option value="1330">1330</option>
+<option value="1325">1325</option>
+<option value="1320">1320</option>
+<option value="1315">1315</option>
+<option value="1310">1310</option>
+<option value="1305">1305</option>
+<option value="1300">1300</option>
+<option value="1295">1295</option>
+<option value="1290">1290</option>
+<option value="1285">1285</option>
+<option value="1280">1280</option>
+<option value="1275">1275</option>
+<option value="1270">1270</option>
+<option value="1265">1265</option>
+<option value="1260">1260</option>
+<option value="1255">1255</option>
+<option value="1250">1250</option>
+<option value="1245">1245</option>
+<option value="1240">1240</option>
+<option value="1235">1235</option>
+<option value="1230">1230</option>
+<option value="1225">1225</option>
+<option value="1220">1220</option>
+<option value="1215">1215</option>
+<option value="1210">1210</option>
+<option value="1205">1205</option>
+<option value="1200">1200</option>
+<option value="1195">1195</option>
+<option value="1190">1190</option>
+<option value="1185">1185</option>
+<option value="1180">1180</option>
+<option value="1175">1175</option>
+<option value="1170">1170</option>
+<option value="1165">1165</option>
+<option value="1160">1160</option>
+<option value="1155">1155</option>
+<option value="1150">1150</option>
+<option value="1145">1145</option>
+<option value="1140">1140</option>
+<option value="1135">1135</option>
+<option value="1130">1130</option>
+<option value="1125">1125</option>
+<option value="1120">1120</option>
+<option value="1115">1115</option>
+<option value="1110">1110</option>
+<option value="1105">1105</option>
+<option value="1100">1100</option>
+<option value="1095">1095</option>
+<option value="1090">1090</option>
+<option value="1085">1085</option>
+<option value="1080">1080</option>
+<option value="1075">1075</option>
+<option value="1070">1070</option>
+<option value="1065">1065</option>
+<option value="1060">1060</option>
+<option value="1055">1055</option>
+<option value="1050">1050</option>
+<option value="1045">1045</option>
+<option value="1040">1040</option>
+<option value="1035">1035</option>
+<option value="1030">1030</option>
+<option value="1025">1025</option>
+<option value="1020">1020</option>
+<option value="1015">1015</option>
+<option value="1010">1010</option>
+<option value="1005">1005</option>
+<option value="1000">1000</option></select></div>
+
+</form>      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary date-filter-form-submit" data-form-id="data-filter-form-modal">Filter</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="genre-modal" tabindex="-1" aria-labelledby="genre-modal-label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title fs-5" id="genre-modal-label">Filter by Genre</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row categories-row">
+          <!-- Are there already categories selected? -->
+            <div class="row categories-row">
+  <!-- Search input row -->
+  <div class="col-12 mb-3 autocomplete-container">
+    <div class="autoComplete_wrapper" role="combobox" aria-owns="autoComplete_list_2" aria-haspopup="true" aria-expanded="false"><input type="text" class="form-control category-autocomplete" placeholder="Search for genres..." id="mobile-category-filter" aria-controls="autoComplete_list_2" aria-autocomplete="both"><ul id="autoComplete_list_2" role="listbox" hidden="" class="list-group autocomplete-results"></ul></div>
+  </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="adventure-bce047db-9f67-4195-b654-cffb3e8493b5" href="/the-greatest/adventure-bce047db-9f67-4195-b654-cffb3e8493b5/books">Adventure (697)</a>
+        <a class="category-link d-block mb-2 " data-slug="allegorical" href="/the-greatest/allegorical/books">Allegorical (262)</a>
+    </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="american-history" href="/the-greatest/american-history/books">American History (355)</a>
+        <a class="category-link d-block mb-2 " data-slug="anthologies" href="/the-greatest/anthologies/books">Anthologies (337)</a>
+    </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="autobiography" href="/the-greatest/autobiography/books">Autobiography (733)</a>
+        <a class="category-link d-block mb-2 " data-slug="biography" href="/the-greatest/biography/books">Biography (521)</a>
+    </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="children-s-books" href="/the-greatest/children-s-books/books">Children's books (363)</a>
+        <a class="category-link d-block mb-2 " data-slug="coming-of-age" href="/the-greatest/coming-of-age/books">Coming of age (971)</a>
+    </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="contemporary" href="/the-greatest/contemporary/books">Contemporary (802)</a>
+        <a class="category-link d-block mb-2 " data-slug="crime" href="/the-greatest/crime/books">Crime (531)</a>
+    </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="drama" href="/the-greatest/drama/books">Drama (1098)</a>
+        <a class="category-link d-block mb-2 " data-slug="experimental" href="/the-greatest/experimental/books">Experimental (309)</a>
+    </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="family" href="/the-greatest/family/books">Family (573)</a>
+        <a class="category-link d-block mb-2 " data-slug="fantasy" href="/the-greatest/fantasy/books">Fantasy (804)</a>
+    </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="fiction" href="/the-greatest/fiction/books">Fiction (7092)</a>
+        <a class="category-link d-block mb-2 " data-slug="historical-fiction" href="/the-greatest/historical-fiction/books">Historical fiction (1753)</a>
+    </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="history" href="/the-greatest/history/books">History (768)</a>
+        <a class="category-link d-block mb-2 " data-slug="horror" href="/the-greatest/horror/books">Horror (283)</a>
+    </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="humor" href="/the-greatest/humor/books">Humor (465)</a>
+        <a class="category-link d-block mb-2 " data-slug="modernist" href="/the-greatest/modernist/books">Modernist (289)</a>
+    </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="mystery" href="/the-greatest/mystery/books">Mystery (651)</a>
+        <a class="category-link d-block mb-2 " data-slug="nonfiction" href="/the-greatest/nonfiction/books">Nonfiction (2947)</a>
+    </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="plays" href="/the-greatest/plays/books">Plays (434)</a>
+        <a class="category-link d-block mb-2 " data-slug="poetry" href="/the-greatest/poetry/books">Poetry (740)</a>
+    </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="political" href="/the-greatest/political/books">Political (700)</a>
+        <a class="category-link d-block mb-2 " data-slug="postmodern" href="/the-greatest/postmodern/books">Postmodern (264)</a>
+    </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="psychological" href="/the-greatest/psychological/books">Psychological (936)</a>
+        <a class="category-link d-block mb-2 " data-slug="romance" href="/the-greatest/romance/books">Romance (389)</a>
+    </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="satire" href="/the-greatest/satire/books">Satire (684)</a>
+        <a class="category-link d-block mb-2 " data-slug="science-fiction" href="/the-greatest/science-fiction/books">Science fiction (713)</a>
+    </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="short-stories-3b05c143-3060-4ba0-8c12-52547523f50e" href="/the-greatest/short-stories-3b05c143-3060-4ba0-8c12-52547523f50e/books">Short Stories (382)</a>
+        <a class="category-link d-block mb-2 " data-slug="social-commentary" href="/the-greatest/social-commentary/books">Social &amp; Cultural Fiction (1295)</a>
+    </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="metaphysical-visionary-fiction" href="/the-greatest/metaphysical-visionary-fiction/books">Speculative Fiction (1569)</a>
+        <a class="category-link d-block mb-2 " data-slug="supernatural" href="/the-greatest/supernatural/books">Supernatural (306)</a>
+    </div>
+    <div class="col-6">
+        <a class="category-link d-block mb-2 " data-slug="suspense" href="/the-greatest/suspense/books">Suspense (701)</a>
+        <a class="category-link d-block mb-2 " data-slug="thrillers" href="/the-greatest/thrillers/books">Thrillers (556)</a>
+    </div>
+  <div class="col-6">
+    <a class="fw-semibold" href="/genres">View all genres</a>
+  </div>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="country-modal" tabindex="-1" aria-labelledby="country-modal-label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title fs-5" id="country-modal-label">Filter by Country</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row categories-row">
+          <!-- Are there already categories selected? -->
+            
+<div class="row countries-row">
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/american/authors">American (4369)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/argentinian/authors">Argentinian (30)</a>
+    </div>
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/australian/authors">Australian (112)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/austrian/authors">Austrian (98)</a>
+    </div>
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/british/authors">British (2264)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/bulgarian/authors">Bulgarian (40)</a>
+    </div>
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/canadian/authors">Canadian (187)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/chinese/authors">Chinese (59)</a>
+    </div>
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/colombian/authors">Colombian (29)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/czech/authors">Czech (39)</a>
+    </div>
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/danish/authors">Danish (37)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/dutch/authors">Dutch (29)</a>
+    </div>
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/english/authors">English (41)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/french/authors">French (607)</a>
+    </div>
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/german/authors">German (321)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/greek/authors">Greek (197)</a>
+    </div>
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/hungarian/authors">Hungarian (66)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/indian/authors">Indian (76)</a>
+    </div>
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/irish/authors">Irish (184)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/israeli/authors">Israeli (30)</a>
+    </div>
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/italian/authors">Italian (173)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/japanese/authors">Japanese (93)</a>
+    </div>
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/multiple/authors">Multiple (59)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/new-zealander/authors">New Zealander (31)</a>
+    </div>
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/nigerian/authors">Nigerian (37)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/norwegian/authors">Norwegian (42)</a>
+    </div>
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/polish/authors">Polish (62)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/portuguese/authors">Portuguese (32)</a>
+    </div>
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/roman/authors">Roman (31)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/russian/authors">Russian (212)</a>
+    </div>
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/scottish/authors">Scottish (71)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/south-african/authors">South African (53)</a>
+    </div>
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/spanish/authors">Spanish (120)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/swedish/authors">Swedish (81)</a>
+    </div>
+    <div class="col-6">
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/swiss/authors">Swiss (38)</a>
+        <a class="d-block mb-2" href="/the-greatest-books/written-by/unknown/authors">Unknown (186)</a>
+    </div>
+  <div class="col-6">
+    <a class="fw-semibold" href="/countries">View all countries</a>
+  </div>
+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- wtf Modal -->
+<div class="modal fade" id="survey-modal" tabindex="-1" aria-labelledby="survey-modal-label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title fs-5" id="survey-modal-label">Your Favorite Books</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <turbo-frame loading="lazy" id="survey" src="/user_lists/show_survey">
+          Loading...
+</turbo-frame>      </div>
+    </div>
+  </div>
+</div>
+<turbo-frame id="user_reading_stats"></turbo-frame>
+
+      </div>
+    </div>
+    
+  <form id="sign-in-form" class="invisible" data-controller="login" action="/users/sign_in" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="2pmfgaHzJSoL_7x3X3ENVgAl1QYzNoHpi2xT7SRrBcit0L3kcy5uJVDIhSHCo4jmtu1VR4jaceWazcDxiXS-6g" autocomplete="off">
+    <input type="text" name="auth_data_json" id="auth_data_json">
+</form>
+  <form id="sign-out-form" class="invisible" action="/users/sign_out" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="XgpDSWc35D2VUdQvZmkgSkWRQLPMbVftPH8odec4WL1oJjdfmupkTz-WCt0a_VLIY9rdArELzMZ4mLXKWtT8qg" autocomplete="off">
+</form>
+  <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="authModalLabel">Sign In</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <turbo-frame loading="lazy" id="auth-modal-body" src="/users/auth_modal">
+            Loading...
+</turbo-frame>        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+
+    <turbo-frame>
+      <form id="user-book-actions-form" data-turbo-method="post" action="/user_book_actions/index" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="S8b46WvZ071-1Z9JxnCWMAs1nBqHmtQAgRUNVlI-3t0HIwR2GpRIGvD9li1EGqcKlR61jRc55paVv98VH5xaQw" autocomplete="off">
+        <input autocomplete="off" type="hidden" name="book_ids" id="book_ids" value="266,38,122,64,19,225,50,91,208,102,108,190,329,213,116,36,52,18,209,85,211,217,107,410,135">
+</form>    </turbo-frame>
+
+    <turbo-frame id="review-modal"></turbo-frame>
+
+    <!-- Modal -->
+    <div class="modal fade" id="purchaseModal" tabindex="-1" aria-labelledby="purchaseModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Purchase this book</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal user-confirmation-modal" id="user-confirmation-modal" tabindex="-1" aria-labelledby="user-confirmation-modal-label" data-controller="user-confirmation-modal" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="user-confirmation-modal-label">Edit Profile</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <turbo-frame loading="lazy" id="edit-profile" src="/users/edit_profile">
+              Loading...
+</turbo-frame>          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-user-confirmation-modal-target="closeBtn" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-user-confirmation-modal-target="saveBtn" data-action="click->user-confirmation-modal#submitForm">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="bg-light text-center text-dark">
+      <div class="container py-2">
+        <!-- Existing content -->
+        <ul class="list-unstyled d-flex justify-content-center mb-1 very-small-text">
+          <li class="me-3"><a href="/privacy_policy" class="text-dark">Privacy Policy</a></li>
+          <li class="me-3"><a href="/deletion_policy" class="text-dark">Deletion Policy</a></li>
+          <li class="me-3"><a href="https://www.buymeacoffee.com/thegreatest" target="_blank" class="text-dark">Support the Site!</a></li>
+        </ul>
+        <p class="mb-1 very-small-text">© 2024 The Greatest LLC.</p>
+        <!-- Social Media Links -->
+        <div class="row justify-content-center mb-3">
+          <!-- Twitter -->
+          <div class="col-auto">
+            <a href="https://twitter.com/thegreatestbks" class="btn btn-sm btn-twitter">
+              <i class="bi bi-twitter"></i>
+            </a>
+          </div>
+    
+          <!-- Discord -->
+          <div class="col-auto">
+            <a href="https://discord.gg/8JE9fpMtZp" class="btn btn-sm btn-discord">
+              <i class="bi bi-discord"></i>
+            </a>
+          </div>
+    
+          <!-- Facebook -->
+          <div class="col-auto">
+            <a href="https://www.facebook.com/profile.php?id=61555129978566" class="btn btn-sm btn-facebook">
+              <i class="bi bi-facebook"></i>
+            </a>
+          </div>
+    
+          <!-- Instagram -->
+          <div class="col-auto">
+            <a href="https://www.instagram.com/thegreatestbooksever/" class="btn btn-sm btn-instagram">
+              <i class="bi bi-instagram"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-11479131-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  <script>(function(){if (!document.body) return;var js = "window['__CF$cv$params']={r:'87bd3b166b8f4402',t:'MTcxNDM3MjA5NC42NTQwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);";var _0xh = document.createElement('iframe');_0xh.height = 1;_0xh.width = 1;_0xh.style.position = 'absolute';_0xh.style.top = 0;_0xh.style.left = 0;_0xh.style.border = 'none';_0xh.style.visibility = 'hidden';document.body.appendChild(_0xh);function handler() {var _0xi = _0xh.contentDocument || _0xh.contentWindow.document;if (_0xi) {var _0xj = _0xi.createElement('script');_0xj.innerHTML = js;_0xi.getElementsByTagName('head')[0].appendChild(_0xj);}}if (document.readyState !== 'loading') {handler();} else if (window.addEventListener) {document.addEventListener('DOMContentLoaded', handler);} else {var prev = document.onreadystatechange || function () {};document.onreadystatechange = function (e) {prev(e);if (document.readyState !== 'loading') {document.onreadystatechange = prev;handler();}};}})();</script><iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border: medium; visibility: hidden;"></iframe><script defer="" src="https://static.cloudflareinsights.com/beacon.min.js/v55bfa2fee65d44688e90c00735ed189a1713218998793" integrity="sha512-FIKRFRxgD20moAo96hkZQy/5QojZDAbyx0mQ17jEGHCJc/vi0G2HXLtofwD7Q3NmivvP9at5EVgbRqOaOQb+Rg==" data-cf-beacon="{&quot;rayId&quot;:&quot;87bd3b166b8f4402&quot;,&quot;r&quot;:1,&quot;version&quot;:&quot;2024.4.0&quot;,&quot;token&quot;:&quot;84106604e14a448fa5239c28a70f831e&quot;}" crossorigin="anonymous"></script>
+
+
+<ins class="adsbygoogle adsbygoogle-noablate" style="display: none !important;" data-adsbygoogle-status="done" data-ad-status="unfilled"><div id="aswift_0_host" style="border: medium; height: 0px; width: 0px; margin: 0px; padding: 0px; position: relative; visibility: visible; background-color: transparent; display: inline-block;"><iframe id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;border:0;width:undefinedpx;height:undefinedpx;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" src="https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-2193700692946691&amp;output=html&amp;adk=1812271804&amp;adf=3025194257&amp;lmt=1714367442&amp;plat=2%3A16777216%2C3%3A16%2C4%3A16%2C9%3A32776%2C16%3A8388608%2C17%3A32%2C24%3A32%2C25%3A32%2C30%3A34635776%2C32%3A32%2C41%3A32%2C42%3A32&amp;format=0x0&amp;url=https%3A%2F%2Fthegreatestbooks.org%2Fthe-greatest-books&amp;pra=5&amp;wgl=1&amp;easpi=0&amp;aihb=0&amp;asro=0&amp;dt=1714372092651&amp;bpp=2&amp;bdt=1242&amp;idt=323&amp;shv=r20240425&amp;mjsv=m202404230101&amp;ptt=9&amp;saldr=aa&amp;abxe=1&amp;eoidce=1&amp;nras=1&amp;correlator=2950824189713&amp;frm=20&amp;pv=2&amp;ga_vid=813341461.1714372092&amp;ga_sid=1714372093&amp;ga_hid=1387125083&amp;ga_fc=1&amp;u_tz=-240&amp;u_his=50&amp;u_h=1080&amp;u_w=1920&amp;u_ah=1040&amp;u_aw=1920&amp;u_cd=24&amp;u_sd=1&amp;adx=-12245933&amp;ady=-12245933&amp;biw=1263&amp;bih=851&amp;scr_x=0&amp;scr_y=0&amp;eid=44759876%2C44759927%2C44759842%2C31082703%2C31083013%2C44795922%2C95331042%2C95331556&amp;oid=2&amp;pvsid=2557779671655703&amp;tmod=1433868995&amp;uas=0&amp;nvt=1&amp;fsapi=1&amp;fc=1920&amp;brdim=4%2C4%2C4%2C4%2C1920%2C0%2C1292%2C942%2C1280%2C851&amp;vis=1&amp;rsz=%7C%7Cs%7C&amp;abl=NS&amp;fu=32768&amp;bc=31&amp;bz=1.01&amp;ifi=1&amp;uci=a!1&amp;fsb=1&amp;dtd=344" data-google-container-id="a!1" tabindex="0" title="Advertisement" aria-label="Advertisement" data-load-complete="true"></iframe></div></ins><iframe style="display: none; width: 0px; height: 0px; border: medium; z-index: -1000; left: -1000px; top: -1000px;" name="googlefcPresent"></iframe><ins class="adsbygoogle adsbygoogle-noablate" data-adsbygoogle-status="done" style="display: block; width: 100% !important; height: 129px !important; bottom: -8.00688px; clear: none !important; float: none !important; left: 0px; margin: 0px !important; max-height: none !important; max-width: none !important; opacity: 1; overflow: visible !important; padding: 0px !important; position: fixed; right: auto !important; top: auto !important; vertical-align: baseline !important; visibility: visible !important; z-index: 2147483643; background: rgb(250, 250, 250) !important;" data-anchor-status="ready-to-display" data-ad-status="filled"><div class="grippy-host"></div><div id="aswift_9_host" style="border: medium !important; height: 124px !important; width: 100% !important; margin: 0px !important; padding: 0px !important; position: relative !important; visibility: visible !important; background-color: transparent !important; display: inline-block !important; inset: auto !important; clear: none !important; float: none !important; max-height: none !important; max-width: none !important; opacity: 1 !important; overflow: visible !important; vertical-align: baseline !important; z-index: auto !important;"><iframe id="aswift_9" name="aswift_9" style="width: 1005px !important; height: 124px !important; display: block; margin: 0px auto;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="1005" height="124" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" src="https://googleads.g.doubleclick.net/pagead/html/r20240425/r20110914/zrt_lookup_fy2021.html#RS-1-&amp;adk=1812271801&amp;client=ca-pub-2193700692946691&amp;fa=1&amp;ifi=10&amp;uci=a!a&amp;btvi=4" data-google-container-id="a!a" tabindex="0" title="Advertisement" aria-label="Advertisement" data-load-complete="true" data-google-query-id="COK7yN7l5oUDFW-h0QQdU6QACA"></iframe></div></ins><iframe name="__tcfapiLocator" src="about:blank" style="display: none; width: 0px; height: 0px; border: medium; z-index: -1000; left: -1000px; top: -1000px;"></iframe><iframe name="__uspapiLocator" src="about:blank" style="display: none; width: 0px; height: 0px; border: medium; z-index: -1000; left: -1000px; top: -1000px;"></iframe><iframe name="__gppLocator" src="about:blank" style="display: none; width: 0px; height: 0px; border: medium; z-index: -1000; left: -1000px; top: -1000px;"></iframe><iframe name="googlefcInactive" src="about:blank" style="display: none; width: 0px; height: 0px; border: medium; z-index: -1000; left: -1000px; top: -1000px;"></iframe><iframe name="googlefcLoaded" src="about:blank" style="display: none; width: 0px; height: 0px; border: medium; z-index: -1000; left: -1000px; top: -1000px;"></iframe></body>  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+<ins class="adsbygoogle adsbygoogle-noablate" style="display: none !important; width: 100vw !important; height: 100vh !important; inset: 0px auto auto 0px !important; clear: none !important; float: none !important; margin: 0px !important; max-height: none !important; max-width: none !important; opacity: 1 !important; overflow: visible !important; padding: 0px !important; position: fixed !important; vertical-align: baseline !important; visibility: visible !important; z-index: 2147483647 !important; background: transparent !important;" data-adsbygoogle-status="done" aria-hidden="true" data-ad-status="filled" data-vignette-loaded="true"><div id="aswift_8_host" style="border: medium !important; height: 100vh !important; width: 100vw !important; margin: 0px !important; padding: 0px !important; position: relative !important; visibility: visible !important; background-color: transparent !important; display: inline-block !important; inset: auto !important; clear: none !important; float: none !important; max-height: none !important; max-width: none !important; opacity: 1 !important; overflow: visible !important; vertical-align: baseline !important; z-index: auto !important;"><iframe id="aswift_8" name="aswift_8" style="width: 100vw !important; height: 100vh !important; inset: 0px auto auto 0px !important; position: absolute !important; clear: none !important; display: inline !important; float: none !important; margin: 0px !important; max-height: none !important; max-width: none !important; opacity: 1 !important; overflow: visible !important; padding: 0px !important; vertical-align: baseline !important; visibility: visible !important; z-index: auto !important;" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="" height="" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" src="https://googleads.g.doubleclick.net/pagead/html/r20240425/r20110914/zrt_lookup_fy2021.html#RS-0-&amp;adk=1812271808&amp;client=ca-pub-2193700692946691&amp;fa=8&amp;ifi=9&amp;uci=a!9" data-google-container-id="a!9" tabindex="0" title="Advertisement" aria-label="Advertisement" data-google-query-id="CN-7yN7l5oUDFW-h0QQdU6QACA" data-load-complete="true"></iframe></div></ins></html>
