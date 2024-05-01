@@ -8,17 +8,17 @@ import java.util.Map.Entry;
 import java.util.Scanner;
 
 public class Lighthouse {
-    public static final String TABLE_ROW_FORMAT = "| %-9s | %-9.3f |%n";
+    public static final String TABLE_ROW_FORMAT = "| %-9s | %-8.3f |%n";
 
     private static void printTable(List<Entry<String, Double>> result) {
         // table header
-        System.out.format("+----------+------------+%n");
-        System.out.format("| Document | Weight     |%n");
-        System.out.format("+----------+------------+%n");
+        System.out.format("+-----------+----------+%n");
+        System.out.format("| Document  | Weight   |%n");
+        System.out.format("+-----------+----------+%n");
 
         result.stream().forEach(entry -> System.out.format(TABLE_ROW_FORMAT, entry.getKey(), entry.getValue()));
 
-        System.out.format("+----------+-------------+%n");
+        System.out.format("+----------+-----------+%n");
     }
 
     public static void main(String[] args) {
