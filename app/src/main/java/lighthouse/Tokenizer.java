@@ -49,8 +49,6 @@ public class Tokenizer {
         File outputDir;
         inputDir = new File(inputDirPath);
         outputDir = new File(outputDirPath);
-        // inputDir = new File(ClassLoader.getSystemResource(inputDirPath).toURI());
-        // outputDir = new File(ClassLoader.getSystemResource(outputDirPath).toURI());
 
         // if output directory does not exist, make it
         if (!outputDir.exists()) {
@@ -67,7 +65,7 @@ public class Tokenizer {
 
         File[] files = inputDir.listFiles();
         int numFiles = files.length;
-        System.out.printf("Found %d documents to index in input directory.\n", numFiles);
+        System.out.printf("Found %d documents to index in input directory.%n", numFiles);
 
         // tokenize each file in the input directory
         // write the token counter into the relevant output file

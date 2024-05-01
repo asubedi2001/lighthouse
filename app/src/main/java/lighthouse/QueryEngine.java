@@ -162,7 +162,11 @@ public class QueryEngine {
         }
 
         // now turn the map into a list of document/weight pairs and sort
-        return documentWeights.entrySet().stream().sorted(Map.Entry.comparingByValue()).collect(Collectors.toList());
+        return documentWeights.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue())
+                .collect(Collectors.toList())
+                .reversed();
     }
 
     private List<String> normalizeQuery(String query) {
