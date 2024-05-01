@@ -8,11 +8,7 @@ import java.util.Map.Entry;
 import java.util.Scanner;
 
 public class Lighthouse {
-    public static final String TABLE_ROW_FORMAT = "| %-9s | %-9s |%n";
-
-    public String getGreeting() {
-        return "Hello World!";
-    }
+    public static final String TABLE_ROW_FORMAT = "| %-9s | %-9.3f |%n";
 
     private static void printTable(List<Entry<String, Double>> result) {
         // table header
@@ -26,7 +22,9 @@ public class Lighthouse {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Lighthouse().getGreeting());
+        // tokenize the corpus
+        Tokenizer.tokenize();
+
         QueryEngine engine = new QueryEngine("tokens");
 
         Scanner queryScanner = new Scanner(System.in);

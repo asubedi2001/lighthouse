@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +15,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
+import lighthouse.util.ProgressBar;
 import lighthouse.util.TDMHeader;
 import lighthouse.util.TDMNode;
 
@@ -24,8 +24,6 @@ public class QueryEngine {
     public static final double BM25_K = 1.5;
     public static final double BM25_B = .75;
 
-    private static final double TICKMARK_PCT = .1;
-
     private Map<String, TDMHeader> termMatrix;
     private Map<String, Integer> documentLengths;
 
@@ -33,16 +31,16 @@ public class QueryEngine {
     private int numDocuments;
     private double avgDocLength;
 
-    public QueryEngine(String tokenDir) {
-        loadTDM(tokenDir);
-        calculateWeights(tokenDir);
+    public QueryEngine(String tokenDirPath) {
+        loadTDM(tokenDirPath);
+        calculateWeights(tokenDirPath);
     }
 
     private void loadTDM(String tokenDirPath) {
         // initializes all instance variables
         // performs all necessary setup to calculate weights
 
-        System.out.println("(1/2) Building index...");
+        System.out.println("(2/3) Building index...");
 
         termMatrix = new HashMap<>();
         documentLengths = new HashMap<>();
@@ -52,19 +50,21 @@ public class QueryEngine {
         File tokenDir = new File(tokenDirPath);
         File[] tokenFiles = tokenDir.listFiles();
         int fileCount = tokenFiles.length;
-        long progressPct = Math.max(Math.round(fileCount * TICKMARK_PCT), 1);
+        long progressPct = Math.max(Math.round(fileCount * ProgressBar.TICKMARK_PCT), 1);
 
         for (File tokenFile : tokenFiles) {
             documentLength = 0;
 
             if (numDocuments % progressPct == 0) {
-                printProgressBar(numDocuments, fileCount);
+                ProgressBar.printProgressBar(numDocuments, fileCount);
             }
 
             try (CSVParser tokenParser = CSVParser.parse(tokenFile, StandardCharsets.UTF_8, CSVFormat.DEFAULT)) {
                 for (CSVRecord tokenRecord : tokenParser) {
                     String token = tokenRecord.get(0);
                     int count = Integer.parseInt(tokenRecord.get(1));
+
+                    documentLength += count;
 
                     TDMNode newNode = new TDMNode(tokenFile.getName(), count);
                     if (!termMatrix.containsKey(token)) {
@@ -92,18 +92,18 @@ public class QueryEngine {
     }
 
     private void calculateWeights(String tokenDirPath) {
-        System.out.println("(2/2) Calculating weights...");
+        System.out.println("(3/3) Calculating weights...");
 
         int documentCounter = 0;
 
         File tokenDir = new File(tokenDirPath);
         File[] tokenFiles = tokenDir.listFiles();
         int fileCount = tokenFiles.length;
-        long progressPct = Math.max(Math.round(fileCount * TICKMARK_PCT), 1);
+        long progressPct = Math.max(Math.round(fileCount * ProgressBar.TICKMARK_PCT), 1);
 
         for (File tokenFile : tokenFiles) {
             if (documentCounter % progressPct == 0) {
-                printProgressBar(documentCounter, fileCount);
+                ProgressBar.printProgressBar(documentCounter, fileCount);
             }
             try (CSVParser tokenParser = CSVParser.parse(tokenFile, StandardCharsets.UTF_8, CSVFormat.DEFAULT)) {
                 for (CSVRecord tokenRecord : tokenParser) {
@@ -112,6 +112,7 @@ public class QueryEngine {
 
                     TDMHeader posting = termMatrix.get(token);
 
+                    // compute the term weight
                     int nqi = posting.getLen();
                     double termWeight = BM25(frequency, nqi, numDocuments, documentLengths.get(tokenFile.getName()),
                             avgDocLength);
@@ -173,35 +174,10 @@ public class QueryEngine {
                 .collect(Collectors.toList());
     }
 
-    private void printProgressBar(int counter, int totalDocuments) {
-        // loaded_pct = round((counter / file_count) * 10)
-        // to_load_pct = 10 - loaded_pct
-        // progress_bar = "\r[" + "█" * loaded_pct + " " * to_load_pct + "] "
-        // progress_pct = "0%" if loaded_pct == 0 else f"{loaded_pct}0%"
-        // print(progress_bar + progress_pct, end="")
-
-        long loadedPct = Math.round(((double) counter / totalDocuments) * 10);
-        long toLoadPct = 10 - loadedPct;
-
-        String progressBar = "\r[";
-        progressBar += String.join("", Collections.nCopies((int) loadedPct, "█"));
-        progressBar += String.join("", Collections.nCopies((int) toLoadPct, " "));
-        progressBar += "] ";
-
-        String progressPct;
-        if (loadedPct == 0) {
-            progressPct = "0%";
-        } else {
-            progressPct = loadedPct + "0%";
-        }
-
-        System.out.print(progressBar + progressPct);
-    }
-
     public static double BM25(int fqi, int nqi, int numDocuments, int documentLength, double avgDocLength) {
         double k1 = BM25_K;
         double b = BM25_B;
-        return IDF(numDocuments, nqi) * ((fqi * (k1 + 1)) / (fqi + k1 * (1 - b + b * documentLength / avgDocLength)));
+        return IDF(numDocuments, nqi) * ((fqi * (k1 + 1)) / (fqi + k1 * (1 - b + b * (documentLength / avgDocLength))));
     }
 
     public static double IDF(int numDocuments, int nqi) {
