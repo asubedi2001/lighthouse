@@ -7,12 +7,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -21,8 +21,8 @@ import org.apache.commons.csv.CSVPrinter;
 import org.jsoup.Jsoup;
 
 public class Tokenizer {
-    public static final String INPUT_DIR = "files";
-    public static final String OUTPUT_DIR = "files_out";
+    public static final String INPUT_DIR = "../corpus";
+    public static final String OUTPUT_DIR = "../tokens";
     public static final String STOPLIST_PATH = "stoplist.txt";
 
     protected static final Set<String> STOPLIST = loadStoplist(STOPLIST_PATH);
@@ -45,13 +45,10 @@ public class Tokenizer {
          */
         File inputDir;
         File outputDir;
-        try {
-            inputDir = new File(ClassLoader.getSystemResource(inputDirPath).toURI());
-            outputDir = new File(ClassLoader.getSystemResource(outputDirPath).toURI());
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-            return;
-        }
+        inputDir = new File(inputDirPath);
+        outputDir = new File(outputDirPath);
+        // inputDir = new File(ClassLoader.getSystemResource(inputDirPath).toURI());
+        // outputDir = new File(ClassLoader.getSystemResource(outputDirPath).toURI());
 
         // if output directory does not exist, make it
         if (!outputDir.exists()) {
@@ -67,16 +64,31 @@ public class Tokenizer {
         }
 
         File[] files = inputDir.listFiles();
-        System.out.printf("Found %d documents to index in input directory.", files.length);
+        System.out.printf("Found %d documents to index in input directory.\n", files.length);
 
         // tokenize each file in the input directory
         // write the token counter into the relevant output file
         for (File file : files) {
-            System.out.println(file.getName());
+            // TODO: transform input file name into output file name
+            String outfileName = generateOutfileName(file, outputDirPath);
+            File outfile = new File(outfileName);
+
+            // fix how the map is stringified -- need to iterate over the map
             Map<String, Integer> tokens = tokenizeFile(file);
-            writeTokens(file, tokens);
+            writeTokens(outfile, tokens);
         }
 
+    }
+
+    private static String generateOutfileName(File inputFile, String outputDirPath) {
+        // OUTPUT_DIR + basename + ".csv"
+
+        String filename = inputFile.getName();
+
+        // stripping off the .html extension (assuming files conform to standard)
+        String basename = filename.substring(0, filename.length() - 5);
+
+        return outputDirPath + "\\" + basename + ".csv";
     }
 
     public static Map<String, Integer> tokenizeFile(File f) {
@@ -113,10 +125,14 @@ public class Tokenizer {
         try (FileWriter fileWriter = new FileWriter(tokenFile);
                 BufferedWriter writer = new BufferedWriter(fileWriter)) {
             CSVPrinter printer = new CSVPrinter(writer, CSVFormat.DEFAULT);
-            printer.printRecords(tokens);
+            for (Entry<String, Integer> entry : tokens.entrySet()) {
+                printer.printRecord(entry.getKey(), entry.getValue());
+            }
             printer.close();
+            System.out.println("wrote file " + tokenFile);
         } catch (IOException e) {
             e.printStackTrace();
+            // System.out.println("IOError: did not write file correctly");
         }
 
     }
