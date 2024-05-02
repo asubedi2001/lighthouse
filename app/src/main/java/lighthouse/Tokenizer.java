@@ -118,7 +118,7 @@ public class Tokenizer {
             // https://stackoverflow.com/questions/14260134/elegant-way-of-counting-occurrences-in-a-java-collection
             return tokensList.stream()
                     .map(String::toLowerCase)
-                    .map(t -> t.replaceAll("[!()_,.?]", ""))
+                    .map(t -> t.replaceAll("[!()_,.?':’]", ""))
                     .filter(t -> t.length() != 0)
                     .filter(t -> !STOPLIST.contains(t))
                     .collect(Collectors.groupingBy(t -> t, Collectors.reducing(0, e -> 1, Integer::sum)));
