@@ -35,6 +35,7 @@ application {
     mainClass = 'lighthouse.Lighthouse'
 }
 
+version = '1.0.0'
 jar {
     manifest {
         attributes (
@@ -42,6 +43,12 @@ jar {
             'Main-Class': 'lighthouse.Lighthouse'
         )
     }
+    archiveBaseName = 'lighthouse'
+    from {
+        configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 tasks.named('test') {
