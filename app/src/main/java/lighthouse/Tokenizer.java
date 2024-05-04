@@ -20,9 +20,11 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.jsoup.Jsoup;
 
+import lighthouse.util.ProgressBar;
+
 public class Tokenizer {
-    public static final String INPUT_DIR = "../corpus";
-    public static final String OUTPUT_DIR = "../tokens";
+    public static final String INPUT_DIR = "corpus";
+    public static final String OUTPUT_DIR = "tokens";
     public static final String STOPLIST_PATH = "stoplist.txt";
 
     protected static final Set<String> STOPLIST = loadStoplist(STOPLIST_PATH);
@@ -47,8 +49,6 @@ public class Tokenizer {
         File outputDir;
         inputDir = new File(inputDirPath);
         outputDir = new File(outputDirPath);
-        // inputDir = new File(ClassLoader.getSystemResource(inputDirPath).toURI());
-        // outputDir = new File(ClassLoader.getSystemResource(outputDirPath).toURI());
 
         // if output directory does not exist, make it
         if (!outputDir.exists()) {
@@ -64,20 +64,30 @@ public class Tokenizer {
         }
 
         File[] files = inputDir.listFiles();
-        System.out.printf("Found %d documents to index in input directory.\n", files.length);
+        int numFiles = files.length;
+        System.out.printf("Found %d documents to index in input directory.%n", numFiles);
 
         // tokenize each file in the input directory
         // write the token counter into the relevant output file
+
+        long progressPct = Math.max(Math.round(numFiles * ProgressBar.TICKMARK_PCT), 1);
+        System.out.println("(1/3) Tokenizing documents");
+
+        int fileCounter = 0;
         for (File file : files) {
-            // TODO: transform input file name into output file name
+
+            if (fileCounter % progressPct == 0) {
+                ProgressBar.printProgressBar(fileCounter, numFiles);
+            }
+
             String outfileName = generateOutfileName(file, outputDirPath);
             File outfile = new File(outfileName);
 
-            // fix how the map is stringified -- need to iterate over the map
             Map<String, Integer> tokens = tokenizeFile(file);
             writeTokens(outfile, tokens);
+            fileCounter++;
         }
-
+        System.out.println();
     }
 
     private static String generateOutfileName(File inputFile, String outputDirPath) {
@@ -108,7 +118,7 @@ public class Tokenizer {
             // https://stackoverflow.com/questions/14260134/elegant-way-of-counting-occurrences-in-a-java-collection
             return tokensList.stream()
                     .map(String::toLowerCase)
-                    .map(t -> t.replaceAll("[!()_,.?]", ""))
+                    .map(t -> t.replaceAll("[!()_,.?':’]", ""))
                     .filter(t -> t.length() != 0)
                     .filter(t -> !STOPLIST.contains(t))
                     .collect(Collectors.groupingBy(t -> t, Collectors.reducing(0, e -> 1, Integer::sum)));
@@ -129,7 +139,7 @@ public class Tokenizer {
                 printer.printRecord(entry.getKey(), entry.getValue());
             }
             printer.close();
-            System.out.println("wrote file " + tokenFile);
+            // System.out.println("wrote file " + tokenFile);
         } catch (IOException e) {
             e.printStackTrace();
             // System.out.println("IOError: did not write file correctly");
@@ -139,5 +149,9 @@ public class Tokenizer {
 
     public static void tokenize() {
         indexDirectory(INPUT_DIR, OUTPUT_DIR);
+    }
+
+    public static void tokenize(String inputDirPath, String outputDirPath) {
+        indexDirectory(inputDirPath, outputDirPath);
     }
 }

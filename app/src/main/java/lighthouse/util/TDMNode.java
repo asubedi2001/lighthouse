@@ -1,23 +1,23 @@
 package lighthouse.util;
 
 public class TDMNode {
-    private int documentID;
+    private String documentID;
     private int termCount;
     private double termWeight;
     private TDMNode next;
 
-    public TDMNode(int documentID, int termCount, int termWeight) {
+    public TDMNode(String documentID, int termCount) {
         this.documentID = documentID;
         this.termCount = termCount;
-        this.termWeight = termWeight;
+        this.termWeight = 0;
         this.next = null;
     }
 
-    public int getDocumentID() {
+    public String getDocumentID() {
         return documentID;
     }
 
-    public void setDocumentID(int documentID) {
+    public void setDocumentID(String documentID) {
         this.documentID = documentID;
     }
 

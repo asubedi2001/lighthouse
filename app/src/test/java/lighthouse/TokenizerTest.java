@@ -17,10 +17,12 @@ class TokenizerTest {
 
     @Test
     void testTokenize() throws IOException {
-        Tokenizer.tokenize();
+        String inputDirPath = "..\\corpus";
+        String outputDirPath = "..\\tokens";
+        Tokenizer.tokenize(inputDirPath, outputDirPath);
         // each input file should generate one output file
-        File inputDir = new File(Tokenizer.INPUT_DIR);
-        File outputDir = new File(Tokenizer.OUTPUT_DIR);
+        File inputDir = new File(inputDirPath);
+        File outputDir = new File(outputDirPath);
         int infileCount = inputDir.list().length;
         int outfileCount = outputDir.list().length;
         assertEquals(infileCount, outfileCount);

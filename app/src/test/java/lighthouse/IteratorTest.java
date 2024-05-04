@@ -22,11 +22,11 @@ class IteratorTest {
         }
 
         // create the TDMHeader
-        TDMNode node1 = new TDMNode(0, 0, 0);
+        TDMNode node1 = new TDMNode("0", 0);
         header = new TDMHeader("test", node1);
 
         for (final int t : termCounts) {
-            TDMNode node = new TDMNode(t, t, t);
+            TDMNode node = new TDMNode("" + t, t);
             header.append(node);
         }
     }
