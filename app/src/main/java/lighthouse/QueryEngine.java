@@ -170,7 +170,7 @@ public class QueryEngine {
     }
 
     private List<String> normalizeQuery(String query) {
-        String[] queryTerms = query.split("\s+");
+        String[] queryTerms = query.split("\\s+");
         return Arrays.asList(queryTerms).stream()
                 .map(String::toLowerCase)
                 .map(t -> t.replaceAll("[!()_,.?]", ""))

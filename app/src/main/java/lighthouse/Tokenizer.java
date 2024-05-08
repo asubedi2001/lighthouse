@@ -109,7 +109,7 @@ public class Tokenizer {
             // grab all visible text from the HTML file
             String documentText = Jsoup.parse(f).body().text();
 
-            String[] tokens = documentText.split("\s+");
+            String[] tokens = documentText.split("\\s+");
             List<String> tokensList = Arrays.asList(tokens);
 
             // remove special characters and downcase the tokens
