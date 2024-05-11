@@ -28,7 +28,7 @@ class QueryTest {
         var result = engine.query("spaghetti");
         assertNotEquals(0, result.size());
 
-        var testResult = result.stream().filter(r -> r.getKey().equals("041.csv")).findAny();
+        var testResult = result.stream().filter(r -> r.getKey().equals("038.csv")).findAny();
         assertEquals(true, testResult.isPresent());
     }
 }
