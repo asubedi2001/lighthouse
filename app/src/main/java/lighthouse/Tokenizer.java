@@ -140,10 +140,8 @@ public class Tokenizer {
                 printer.printRecord(entry.getKey(), entry.getValue());
             }
             printer.close();
-            // System.out.println("wrote file " + tokenFile);
         } catch (IOException e) {
             e.printStackTrace();
-            // System.out.println("IOError: did not write file correctly");
         }
 
     }
