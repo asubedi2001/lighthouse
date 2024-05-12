@@ -2,13 +2,26 @@ package lighthouse.util;
 
 import java.util.Collections;
 
-// a simple static class to handle the printing of a progress bar
+/**
+ * A simple static class to handle the printing of a progress bar
+ */
 public class ProgressBar {
+    /** 
+     * Percentage at which to display tick marks on the progress bar.
+     */
     public static final double TICKMARK_PCT = .1;
 
+    /**
+     * Private default constructor for creation of a ProgressBar object
+     */
     private ProgressBar() {
     }
 
+    /**
+     * Handle printing the progress bar based off of index loading percentage
+     * @param counter number of files processed
+     * @param totalDocuments total number of files to be processed
+     */
     public static void printProgressBar(int counter, int totalDocuments) {
         // loaded_pct = round((counter / file_count) * 10)
         // to_load_pct = 10 - loaded_pct

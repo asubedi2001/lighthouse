@@ -51,6 +51,11 @@ jar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
+javadoc {
+    source = fileTree('src/main/java/lighthouse') // Specifies source directory for generated javadocs
+    destinationDir = file("$buildDir/docs/javadoc") // Specifies the output directory for the generated documentation
+}
+
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
