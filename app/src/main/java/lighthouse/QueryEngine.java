@@ -52,6 +52,7 @@ public class QueryEngine {
         int fileCount = tokenFiles.length;
         long progressPct = Math.max(Math.round(fileCount * ProgressBar.TICKMARK_PCT), 1);
 
+        // load tokens from each token file
         for (File tokenFile : tokenFiles) {
             documentLength = 0;
 
@@ -59,6 +60,7 @@ public class QueryEngine {
                 ProgressBar.printProgressBar(numDocuments, fileCount);
             }
 
+            // parse the token, count CSV format and store it in a hashmap
             try (CSVParser tokenParser = CSVParser.parse(tokenFile, StandardCharsets.UTF_8, CSVFormat.DEFAULT)) {
                 for (CSVRecord tokenRecord : tokenParser) {
                     String token = tokenRecord.get(0);
@@ -81,6 +83,8 @@ public class QueryEngine {
 
             numDocuments++;
 
+            // keep track of statistical variables to be used later in term weight
+            // calculations
             totalDocumentLengths += documentLength;
             documentLengths.put(tokenFile.getName(), documentLength);
         }
@@ -92,6 +96,7 @@ public class QueryEngine {
     }
 
     private void calculateWeights(String tokenDirPath) {
+        // calculate the weights of each token
         System.out.println("(3/3) Calculating weights...");
 
         int documentCounter = 0;
@@ -105,6 +110,8 @@ public class QueryEngine {
             if (documentCounter % progressPct == 0) {
                 ProgressBar.printProgressBar(documentCounter, fileCount);
             }
+
+            // calculate the weight of each term in each document
             try (CSVParser tokenParser = CSVParser.parse(tokenFile, StandardCharsets.UTF_8, CSVFormat.DEFAULT)) {
                 for (CSVRecord tokenRecord : tokenParser) {
                     String token = tokenRecord.get(0);
@@ -117,6 +124,7 @@ public class QueryEngine {
                     double termWeight = BM25(frequency, nqi, numDocuments, documentLengths.get(tokenFile.getName()),
                             avgDocLength);
 
+                    // locate the term weight in the postings file and update the weight
                     for (TDMNode node : posting) {
                         if (node.getDocumentID().equals(tokenFile.getName())) {
                             node.setTermWeight(termWeight);
@@ -170,6 +178,10 @@ public class QueryEngine {
     }
 
     private List<String> normalizeQuery(String query) {
+        // 1. split on whitespace
+        // 2. downcase
+        // 3. remove (most) symbols
+        // 4. remove empty strings
         String[] queryTerms = query.split("\\s+");
         return Arrays.asList(queryTerms).stream()
                 .map(String::toLowerCase)
@@ -179,12 +191,14 @@ public class QueryEngine {
     }
 
     public static double BM25(int fqi, int nqi, int numDocuments, int documentLength, double avgDocLength) {
+        // Okapi BM25 term weighting
         double k1 = BM25_K;
         double b = BM25_B;
         return IDF(numDocuments, nqi) * ((fqi * (k1 + 1)) / (fqi + k1 * (1 - b + b * (documentLength / avgDocLength))));
     }
 
     public static double IDF(int numDocuments, int nqi) {
+        // inverse document frequency function
         return Math.log(1 + (numDocuments - nqi + .5) / (nqi + .5));
     }
 }

@@ -41,6 +41,7 @@ public class TDMHeader implements Iterable<TDMNode> {
     }
 
     private class TDMIterator implements Iterator<TDMNode> {
+        // iterator interface to allow for-each linkedlist traversal
         private TDMNode iter;
 
         public TDMIterator(TDMNode listHead) {

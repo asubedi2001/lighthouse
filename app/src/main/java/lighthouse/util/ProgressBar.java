@@ -2,6 +2,7 @@ package lighthouse.util;
 
 import java.util.Collections;
 
+// a simple static class to handle the printing of a progress bar
 public class ProgressBar {
     public static final double TICKMARK_PCT = .1;
 
@@ -15,6 +16,7 @@ public class ProgressBar {
         // progress_pct = "0%" if loaded_pct == 0 else f"{loaded_pct}0%"
         // print(progress_bar + progress_pct, end="")
 
+        // compute the scaled percentage of loaded vs toLoad
         long loadedPct = Math.round(((double) counter / totalDocuments) * 10);
         long toLoadPct = 10 - loadedPct;
 

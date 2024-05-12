@@ -33,6 +33,7 @@ public class Tokenizer {
     }
 
     public static Set<String> loadStoplist(String stoplistPath) {
+        // load the stoplist identified by stoplistPath
         InputStream stoplistInputStream = ClassLoader.getSystemResourceAsStream(stoplistPath);
         BufferedReader stoplistReader = new BufferedReader(
                 new InputStreamReader(stoplistInputStream, StandardCharsets.UTF_8));

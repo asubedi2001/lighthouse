@@ -1,16 +1,15 @@
 package lighthouse.util;
 
-public class TDMNode {
+// node representing an entry in the term-document matrix
+public class TDMNode extends ListNode {
     private String documentID;
     private int termCount;
     private double termWeight;
-    private TDMNode next;
 
     public TDMNode(String documentID, int termCount) {
         this.documentID = documentID;
         this.termCount = termCount;
         this.termWeight = 0;
-        this.next = null;
     }
 
     public String getDocumentID() {
@@ -38,11 +37,11 @@ public class TDMNode {
     }
 
     public TDMNode getNext() {
-        return next;
+        return (TDMNode) super.getNext();
     }
 
     public void setNext(TDMNode next) {
-        this.next = next;
+        super.setNext(next);
     }
 
 }
