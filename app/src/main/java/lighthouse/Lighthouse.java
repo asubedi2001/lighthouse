@@ -24,7 +24,7 @@ public class Lighthouse {
 
         result.stream().forEach(entry -> System.out.format(TABLE_ROW_FORMAT, entry.getKey(), entry.getValue()));
 
-        System.out.format("+----------+-----------+%n");
+        System.out.format("+-----------+----------+%n");
     }
 
     /**
